@@ -237,5 +237,5 @@
   <system systemId="http://maven.apache.org/xsd/archetype-catalog-1.0.0.xsd" uri="jar:file:/C:/Users/JAVA01/eclipse/jee-2022-12/eclipse/../../../.p2/pool/plugins/org.eclipse.m2e.model.edit_2.0.200.20230130-0743.jar!/xsd/archetype-catalog-1.0.0.xsd"/>
   <system systemId="http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd" uri="jar:file:/C:/Users/JAVA01/eclipse/jee-2022-12/eclipse/../../../.p2/pool/plugins/org.eclipse.m2e.model.edit_2.0.200.20230130-0743.jar!/xsd/archetype-descriptor-1.0.0.xsd"/>
   <uri id="org.w3c.xinclude" name="http://www.w3.org/2001/XInclude" uri="jar:file:/C:/Users/JAVA01/eclipse/jee-2022-12/eclipse/../../../.p2/pool/plugins/org.eclipse.wst.xsl.core_1.2.0.v201802171654.jar!/xslt-schemas/xinclude.xsd"/>
-  <public publicId="-//LOG4J//DTD LOG4J//EN" uri="jar:file:/C:/Users/JAVA01/.p2/pool/plugins/org.springsource.ide.eclipse.commons.ui_4.18.1.202305021750.jar!/dtd/log4j-1.2.dtd" webURL="https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd"/>
+  <public publicId="-//LOG4J//DTD LOG4J//EN" uri="jar:file:/C:/Users/JAVA01/eclipse/jee-2022-12/eclipse/../../../.p2/pool/plugins/org.springsource.ide.eclipse.commons.ui_4.18.1.202305021750.jar!/dtd/log4j-1.2.dtd" webURL="https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd"/>
 </catalog>
