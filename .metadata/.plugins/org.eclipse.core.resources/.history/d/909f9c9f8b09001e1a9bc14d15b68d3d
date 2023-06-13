@@ -1,0 +1,27 @@
+package com.ezen.g03;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class ModelController {
+   
+	
+	
+	@RequestMapping("/")   // 요청 주소가  http://localhost:8070/ 일 때 실행되는 메서드
+	public @ResponseBody String root() {
+		return "<h1>Model & View</h1>";  // 화면에 보여질 내용이 String 으로 리턴됨
+	}
+	
+	
+	
+	@RequestMapping("/test1")    // 요청 주소가  http://localhost:8070/test1 일 때 실행되는 메서드
+	public String test1() {
+		
+		return "test1"; // 화면에 표시될 jsp 파일 이름이 리턴됨.
+	}
+	
+	
+	
+}
