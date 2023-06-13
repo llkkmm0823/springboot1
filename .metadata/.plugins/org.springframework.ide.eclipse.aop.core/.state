@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aop-reference-model>
+<aop-project name="SpringBoot_G08"/>
+<aop-project name="SpringBoot_G05"/>
 <aop-project name="SpringBoot_G04"/>
+<aop-project name="SpringBoot_G07"/>
 </aop-reference-model>

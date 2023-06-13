@@ -22,7 +22,7 @@ public class ContentValidator implements Validator{
 		//null값(new String()조차도 실행안됨)이거나 값이 비어있거나("")
 		if(sWriter == null || sWriter.trim().isEmpty()) {
             System.out.println("Writer is null or empty");
-            errors.rejectValue("wrtier", "trouble");
+            errors.rejectValue("writer", "trouble");
     }
     
     if(sContent == null || sContent.trim().isEmpty()) {
