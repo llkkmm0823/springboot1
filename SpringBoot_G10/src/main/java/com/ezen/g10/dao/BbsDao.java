@@ -22,8 +22,9 @@ public class BbsDao implements IBbsDao {
 	public List<BbsDto> getList() {
 		String sql = "select *from bbs order by id desc";
 		/*
-		 * List<BbsDto> list = template.query(sql, new BeanPropertyRowMapper<BbsDto>(BbsDto.class)
-		 * 										, 물음표가 sql에 있다면 들어갈 항목들을 순서대로 나열);
+		 * List<BbsDto> list = template.query(sql, new
+		 * BeanPropertyRowMapper<BbsDto>(BbsDto.class) , 물음표가 sql에 있다면 들어갈 항목들을 순서대로
+		 * 나열);
 		 */
 
 		List<BbsDto> list = template.query(sql, new RowMapper<BbsDto>() {
@@ -41,35 +42,54 @@ public class BbsDao implements IBbsDao {
 			}
 		}
 		// , 물음표에 들어갈 항목들을 순서대로 나열
-	);
+		);
 		return list;
 	}
 
 	@Override
 	public int write(BbsDto bdto) {
 		String sql = "insert into bbs values(bbs_seq.nextVal, ? , ? , ?)";
-		int result = template.update(sql , bdto.getWriter(), bdto.getTitle(), bdto.getContent());		
+		int result = template.update(sql, bdto.getWriter(), bdto.getTitle(), bdto.getContent());
 		return result;
 	}
 
 	@Override
 	public int update(BbsDto bdto) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "update bbs set writer=?,title=?, content=? where id=?";
+		int result = template.update(sql, bdto.getWriter(), bdto.getTitle(), bdto.getContent(), bdto.getId());
+		return result;
 	}
 
 	@Override
 	public int delete(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "delete from bbs where id=?";
+		int result = template.update(sql, id);
+		return result;
 	}
 
 	@Override
 	public BbsDto view(int id) {
-		String sql = "select *from bbs where id=?";		
-		BbsDto bdto = template.queryForObject(sql, new BeanPropertyRowMapper<BbsDto>(BbsDto.class),id);
-		
-		return bdto;
+		String sql = "select *from bbs where id=?";
+//		BbsDto bdto = template.queryForObject(sql, new BeanPropertyRowMapper<BbsDto>(BbsDto.class),id);
+
+		List<BbsDto> list = template.query(sql, new RowMapper<BbsDto>() {
+
+			@Override
+			public BbsDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+				BbsDto bdto = new BbsDto();
+				bdto.setId(rs.getInt("id"));
+				bdto.setWriter(rs.getString("writer"));
+				bdto.setContent(rs.getString("content"));
+				bdto.setTitle(rs.getString("title"));
+
+				return bdto;
+			}
+		}, id);
+		if (list.size() == 0)
+			return null;
+		else
+			return list.get(0);
+		// return bdto;
 	}
 
 }

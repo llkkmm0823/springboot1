@@ -21,7 +21,7 @@
 				<td>${dto.id}</td>
 				<td>${dto.writer}</td>
 				<td><a href="view?id=${dto.id}">${dto.title}</a></td>
-				<td><a href="delete?id=${dto.id }">X</a></td>
+				<td><a href="delete?id=${dto.id }">삭제</a></td>
 			</tr>
 		</c:forEach>
 	</table>
