@@ -1,6 +1,6 @@
 package com.ezen.g09;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ public class UserController {
 	
 	@RequestMapping("/")
 	public String main(Model model) {
-	ArrayList<UserDto> list = udao.selectAll();
+	List<UserDto> list = udao.selectAll();
 	model.addAttribute("users",list);
 	
 	return "userlist";
