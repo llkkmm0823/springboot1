@@ -5,4 +5,16 @@
 
 <mapper namespace = "com.ezen.g14.dao.IBoardDao">
 
+<select id="getAllCount" resultType="_int">
+	select count(*)from board
+</select>
+
+<select id="getBoardList" parameterType="com.ezen.g14.dto.Paging" resultType="com.ezen.g14.dto.BoardVO">
+	select *from(
+		select *from(
+			select rownum as rn, b.*from ((select*from board order by num desc)b)
+		)where rn&gt;=#{startNum}
+	)where rn&lt;=#{endNum}
+</select>
+
 </mapper>
