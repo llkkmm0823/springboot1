@@ -1,6 +1,7 @@
 package com.ezen.g14.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ezen.g14.dto.BoardVO;
+import com.ezen.g14.dto.Paging;
 import com.ezen.g14.service.BoardService;
 
 @Controller
@@ -44,10 +47,13 @@ public class BoardController {
 			 * // ... Paging까지 controller에서 처리하기엔 내용이 복잡해짐
 			 */
 			
-			//page 파라미터를 품고 있는 request service에 보내서 페이지 처리 및 해당 게시물 조회 후 hashmap에서 모두 담아 리턴받을 예정			
+			//page 파라미터를 품고 있는 request service에 보내서 페이지 처리 및 해당 게시물 조회 후 hashmap에 모두 담아 리턴받을 예정			
 			HashMap<String, Object> result = bs.getBoardList(request);
-			
-			
+			//List<BoardVO> list = (List<BoardVO>)result.get("boardList");
+			//Paging paging = (Paging) result.get("paging");
+			mav.addObject("boardList",(List<BoardVO>)result.get("boardList"));
+			mav.addObject("paging",result.get("paging"));
+			mav.setViewName("board/main");
 		}
 		return mav;
 	}

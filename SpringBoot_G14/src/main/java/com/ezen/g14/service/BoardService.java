@@ -40,7 +40,8 @@ public class BoardService {
 		 paging.setBeginPage(page);
 		 int count = bdao.getAllCount();
 		 paging.setTotalCount(count);
-		 paging.paging(); // private에서 public으로 바뀐 paging 메서드를 수동으로 호출
+		 //paging.paging(); // private에서 public으로 바뀐 paging 메서드를 수동으로 호출
+		 //private이면 호출 필요 X
 		 
 		 //작업이 끝난 paging 객체를 이용하여 화면에 보여줄 게시물 조회
 		 List<BoardVO> list = bdao.getBoardList(paging);

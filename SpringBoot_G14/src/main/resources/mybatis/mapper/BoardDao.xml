@@ -17,4 +17,10 @@
 	)where rn&lt;=#{endNum}
 </select>
 
+<select id="getReplyCount" resultType="_int">
+	select count(*)from reply where boardnum=#{param1}
+</select>
+
+
+
 </mapper>
