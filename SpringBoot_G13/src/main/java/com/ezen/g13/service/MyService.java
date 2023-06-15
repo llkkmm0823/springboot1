@@ -1,5 +1,7 @@
 package com.ezen.g13.service;
 
+import javax.management.RuntimeErrorException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,14 +17,20 @@ public class MyService {
 	@Autowired
 	ITransactionDao2 td2;
 	
-	@Transactional //롤백해주는 거시기임
+	@Transactional(rollbackFor = {RuntimeException.class,Exception.class}) //이게 기본 속성이고 원래 이렇게 쓰긴 하는데
+	//@Transactional //(롤백해주는 거시기) <<- 이렇게 써도 작동은 잘 됨.
+	//RuntimeException과 Error가 발생했을 경우에는 기본적으로 rollback이 된다는 것. 그 외에는 안됨
+	
+	
 	//try/catch구문 사용 시 정상실행으로 작동하는 것으로 인지하여 Transactional이 작동하지 않게 됨
 	public int buy(String id, int amount, int error) {
 		td1.buy(id, amount);
 		if (error == 0) {
 			int n = 10 / 0;
+			//throw new RuntimeErrorException(); -> ??????? 암튼 갑자기 중요한게 아니라함 ;; 모르게씀
 		}
 		td2.buy(id, amount);
+		
 		return error;
 	}	
 }
