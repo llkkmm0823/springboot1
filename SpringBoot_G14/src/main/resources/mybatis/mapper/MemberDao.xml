@@ -5,4 +5,10 @@
 
 <mapper namespace = "com.ezen.g14.dao.IMemberDao">
 
+<select id="getMember" resultType="com.ezen.g14.dto.MemberVO">
+	select*from member where userid = #{param1}
+</select>
+
+
+
 </mapper>
