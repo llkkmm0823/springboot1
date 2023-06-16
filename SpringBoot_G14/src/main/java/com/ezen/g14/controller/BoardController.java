@@ -2,6 +2,7 @@ package com.ezen.g14.controller;
 
 
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,12 +11,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.g14.dto.BoardVO;
 import com.ezen.g14.dto.Paging;
 import com.ezen.g14.service.BoardService;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
 public class BoardController {
@@ -27,8 +32,8 @@ public class BoardController {
 	public ModelAndView main( HttpServletRequest request  ) {
 		ModelAndView mav = new ModelAndView();
 		
-		HttpSession sessison = request.getSession();
-		if ( sessison.getAttribute("loginUser") == null)
+		HttpSession session = request.getSession();
+		if ( session.getAttribute("loginUser") == null)
 			mav.setViewName("member/loginForm");
 		else {
 			
@@ -58,6 +63,55 @@ public class BoardController {
 		return mav;
 		} 
 
+	@RequestMapping("/boardView")
+	public ModelAndView boardView(@RequestParam("num") int num ) {
+	ModelAndView mav = new ModelAndView();		
+	
+	HashMap<String,Object> result = bs.boardView(num);
+	mav.addObject("board",result.get("board"));
+	mav.addObject("replyList",result.get("replyList"));
+	mav.setViewName("board/boardView");
+	return mav;
+		}
 	
 	
+	@RequestMapping("/boardWriteForm")
+	public String write_Form(HttpServletRequest request ) {
+		String url="board/boardWriteForm";
+		HttpSession session = request.getSession();
+		if ( session.getAttribute("loginUser") == null)
+			url="member/loginForm";
+		
+		return url;
+	}
+	
+	@RequestMapping(value="boardWrite", method = RequestMethod.POST)
+	public String boardWrite(
+			@ModelAttribute("dto") @Valid BoardVO boardvo,
+			Model model, HttpServletRequest request
+			
+			) {
+		
+		String path = context.getRealPath("resources/upload");
+		
+		try {
+			MultipartRequest multi = new MultipartRequest(
+					request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy()
+			);
+			BoardDto bdto = new BoardDto();
+			bdto.setPass( multi.getParameter("pass") );
+			bdto.setUserid( multi.getParameter("userid") );
+			bdto.setEmail( multi.getParameter("email") );
+			bdto.setTitle(  multi.getParameter("title") );
+			bdto.setContent( multi.getParameter("content") );
+			bdto.setImgfilename( multi.getFilesystemName("imgfilename") );
+			
+			bs.insertBoard( bdto );
+			
+		} catch (IOException e) { e.printStackTrace();
+		}
+		
+		return "redirect:/main";
+	}
+		
 }

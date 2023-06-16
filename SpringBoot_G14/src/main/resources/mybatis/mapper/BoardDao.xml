@@ -22,5 +22,19 @@
     <select id="getReplyCount" resultType="_int">
        select count(*) from reply where boardnum =#{param1}
     </select>
+    
+    <update id="plusOneReadCount">
+    	update board set readcount = readcount + 1 where num = #{param1}
+    </update>
+    
+    <select id="getBoard" resultType="com.ezen.g14.dto.BoardVO">
+    	select*from board where num = #{param1}
+    </select>
+    
+    <select id="selectReply" resultType="com.ezen.g14.dto.ReplyVO">  
+    	select*from reply where boardnum = #{param1}
+    </select>
+    
+    
   
 </mapper>

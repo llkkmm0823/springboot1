@@ -6,7 +6,7 @@ function idCheck(){
 	}
 	var k = document.frm.userid.value
 	var opt = "toolbar=no, menubar=no,resizable=no,width=450,height=200";
-	window.open("idcheck?userid="+k, "id check", opt);        
+	window.open("idCheck?userid="+k, "id Check", opt);        
 }
 
 

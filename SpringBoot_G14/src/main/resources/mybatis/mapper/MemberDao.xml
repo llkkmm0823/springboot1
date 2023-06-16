@@ -15,7 +15,12 @@
     
     <insert id="insertMember" parameterType="com.ezen.g14.dto.MemberVO">
         insert into member( userid, name, pwd, email, phone, provider)
-        values( #{userid},#{name},#{pwd},#{email},#{phone,},#{provider})
+        values( #{userid},#{name},#{pwd},#{email},#{phone},#{provider})
     </insert>
+    
+    
+    <update id="updateMember" parameterType="com.ezen.g14.dto.MemberVO">
+    	update member set name = #{name}, pwd= #{pwd}, email= #{email}, phone= #{phone} where userid= #{userid}
+    </update>
    
 </mapper>

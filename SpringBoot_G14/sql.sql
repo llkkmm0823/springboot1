@@ -14,7 +14,7 @@ create table member(
 
 
 insert into member values('홍길동','scott','1234','scott@abc.com','010-1234-124');
-
+update member set provider='board' where userid='scott';
 
 alter table member add provider varchar2(30);
 

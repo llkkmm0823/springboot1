@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.ezen.g14.dao.IBoardDao;
 import com.ezen.g14.dto.BoardVO;
 import com.ezen.g14.dto.Paging;
+import com.ezen.g14.dto.ReplyVO;
 
 @Service
 public class BoardService {
@@ -55,6 +56,25 @@ public class BoardService {
 	result.put("paging", paging);
 	
 	
+		return result;
+	}
+
+	public HashMap<String, Object> boardView(int num) {
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		//1. 조회수를 1 증가 시킴
+		bdao.plusOneReadCount(num);
+		
+		//2. 게시물을 조회
+		BoardVO bvo = bdao.getBoard(num);
+		
+		//3. 댓글을 조회
+		List<ReplyVO> list = bdao.selectReply(num);
+		
+		result.put("board", bvo);
+		result.put("replyList", list);
+
+		
+		
 		return result;
 	}
 

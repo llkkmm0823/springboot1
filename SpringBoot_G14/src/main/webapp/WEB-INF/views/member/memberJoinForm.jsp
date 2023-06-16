@@ -17,7 +17,7 @@
         <table>
                 <tr><th>아이디</th><td><input type="text" name="userid" size="20" value="${dto.userid }">*
                         <input type="button" value="중복체크" onClick="idCheck();">
-                        <input type="hidden" value="re_id" value="${re_id }"></td></tr>
+                        <input type="hidden" name="re_id" value="${re_id }"></td></tr>
                 <tr><th>암호</th><td><input type="password" name="pwd" size="20">*</td>
                 </tr>
                 <tr><th>확인</th><td><input type="password" name="pwd_check" size="20">*</td>
@@ -32,7 +32,7 @@
                         <td><input type="text" size="20" name="email" value="${dto.email }">*</td>
                 </tr>
         </table><br><br>
-        <input type="hidden" value="provider" value="board"/>
+        <input type="hidden" name="provider" value="board"/>
         <input type="submit" value="등록"><input type="reset" value="다시 작성">
         <input type="button" value="로그인페이지로" onClick="history.go(-1);"><br><br>
         ${message }

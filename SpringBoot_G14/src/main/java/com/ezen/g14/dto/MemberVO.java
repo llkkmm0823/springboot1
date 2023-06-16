@@ -26,7 +26,7 @@ public class MemberVO {
 	
 	@NotEmpty(message="이메일을 입력하시므니다")
 	@NotNull(message="이메일을 입력하시므니다")
-	private String Email;
+	private String email;
 	
 	private String provider;
 	
