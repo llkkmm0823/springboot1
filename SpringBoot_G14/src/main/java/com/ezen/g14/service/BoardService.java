@@ -78,4 +78,8 @@ public class BoardService {
 		return result;
 	}
 
+	public void insertBoard(BoardVO bvo) {
+		
+	}
+
 }

@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ezen.g14.dto.BoardVO;
 import com.ezen.g14.dto.Paging;
 import com.ezen.g14.service.BoardService;
+import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
@@ -84,29 +85,27 @@ public class BoardController {
 		
 		return url;
 	}
+	@Autowired
+	ServletContext context;
 	
 	@RequestMapping(value="boardWrite", method = RequestMethod.POST)
-	public String boardWrite(
-			@ModelAttribute("dto") @Valid BoardVO boardvo,
-			Model model, HttpServletRequest request
-			
-			) {
+	public String boardWrite(HttpServletRequest request) {
 		
-		String path = context.getRealPath("resources/upload");
+		String path = context.getRealPath("/upload");
 		
 		try {
 			MultipartRequest multi = new MultipartRequest(
 					request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy()
 			);
-			BoardDto bdto = new BoardDto();
-			bdto.setPass( multi.getParameter("pass") );
-			bdto.setUserid( multi.getParameter("userid") );
-			bdto.setEmail( multi.getParameter("email") );
-			bdto.setTitle(  multi.getParameter("title") );
-			bdto.setContent( multi.getParameter("content") );
-			bdto.setImgfilename( multi.getFilesystemName("imgfilename") );
+			BoardVO bvo = new BoardVO();
+			bvo.setPass( multi.getParameter("pass") );
+			bvo.setUserid( multi.getParameter("userid") );
+			bvo.setEmail( multi.getParameter("email") );
+			bvo.setTitle(  multi.getParameter("title") );
+			bvo.setContent( multi.getParameter("content") );
+			bvo.setImgfilename( multi.getFilesystemName("imgfilename") );
 			
-			bs.insertBoard( bdto );
+			bs.insertBoard( bvo );
 			
 		} catch (IOException e) { e.printStackTrace();
 		}
