@@ -11,4 +11,9 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.servlet.ModelAndView"/>
     <fullyQualifiedTypeName name="com.ezen.g13.service.MyService"/>
+    <fullyQualifiedTypeName name="java.net.URL"/>
+    <fullyQualifiedTypeName name="java.io.BufferedWriter"/>
+    <fullyQualifiedTypeName name="com.ezen.g14.dto.OAuthToken"/>
+    <fullyQualifiedTypeName name="com.ezen.g14.dto.KakaoProfile"/>
+    <fullyQualifiedTypeName name="com.ezen.g14.dto.KakaoProfile.KakaoAccount.Profile"/>
 </qualifiedTypeNameHistroy>

@@ -1,31 +1,35 @@
 drop table member cascade constraints;
+delete from member where pwd='kakao';
 
-create table member (
-	name varchar2(30),
-	userid varchar2(30),
-	pwd varchar2(30),
-	email varchar2(30),
-	phone varchar2(15),
-	primary key(userid)
-	);
-	
-insert into member values('홍길동','scott','1234','scott@abc.com','010-1234-1234');
+
+create table member(
+  name varchar2(30),  
+  userid varchar2(30),  
+  pwd varchar2(30),  
+  email varchar2(30),  
+  phone varchar2(15),  
+  primary key(userid)
+
+);
+
+
+insert into member values('홍길동','scott','1234','scott@abc.com','010-1234-124');
+
+
+alter table member add provider varchar2(30);
 
 select * from member;
 
+select * from board;
 
-create table board (
-	num number(5) primary key,
-	userid varchar2(30),
-	pass varchar2(30),
-	email varchar2(30),
-	title varchar2(50),
-	content varchar2(1000),
-	readcount number(4) default 0,
-	writedate date default sysdate,
-	imgfilename varchar2(100)
-	);
+select * from reply;
+
+
 create sequence board_seq start with 1 increment by 1;
+
+
+delete from member
+
 
 insert into board(num, userid, email, pass, title, content)
 values( board_seq.nextVal, 'hong', 'abc@naver.com', '1234', '첫방문입니다', 
@@ -60,21 +64,17 @@ insert into board(num, userid, email, pass, title, content)
 values(board_seq.nextVal, 'hana', 'hana@daum.net', '1234', '2022년 여름' , 
    '몸시 추울꺼 같아요... 다들 건강 유의 하세요....');
 
-select * from board;
-
 
 create table reply(
-	replynum number(7) primary key, --댓글 순번
-	boardnum number(5),				--댓글의 해당 게시물 번호
-	userid varchar2(20),			--댓글 쓰니
-	writedate date default sysdate,	--작성일
-	content varchar2(1000)			--작성 내용
+   replynum numer(7) primary ket, 
+   boardnum numer(5),
+   userid varchar2(20),
+   writedate date defalut sysdate,
+   content varchar2(1000)
 );
+
 create sequence reply_seq start with 1 increment by 1;
 
-insert into reply values(reply_seq.nextVal,1,'somi',sysdate, '게시판 개설을 축하드립니다');
-insert into reply values(reply_seq.nextVal,2,'light',sysdate, '첫 게시글 작성 감사합니다');
-insert into reply values(reply_seq.nextVal,3,'scott',sysdate, '맛있게 보입니다');
-
-
-
+insert into reply values( reply_seq.nextVal,1,'somi',sysdate,'게시판 개설을 축하드리므니다');
+insert into reply values( reply_seq.nextVal,2,'light',sysdate,'첫 게시글 작성 감사드리므니다');
+insert into reply values( reply_seq.nextVal,3,'scott',sysdate,'맛있게 보이므니다');

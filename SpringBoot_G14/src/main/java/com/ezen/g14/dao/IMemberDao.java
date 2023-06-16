@@ -8,6 +8,8 @@ import com.ezen.g14.dto.MemberVO;
 public interface IMemberDao {
 
 	MemberVO getMember(String userid);
+
+	void insertMember(MemberVO mvo);
 	
 
 }

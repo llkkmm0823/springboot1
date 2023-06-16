@@ -11,9 +11,10 @@ import com.ezen.g14.dto.Paging;
 public interface IBoardDao {
 
 	int getAllCount();
-
 	List<BoardVO> getBoardList(Paging paging);
-
 	int getReplyCount(int num);
 
+	
+	
 }
+

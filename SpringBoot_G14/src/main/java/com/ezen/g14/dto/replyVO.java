@@ -8,14 +8,17 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class replyVO {
+public class ReplyVO {
+  
+	  private int replynum;  
+	  private int boardnum; 
+	  private String  userid; 
+	  private Timestamp  writedate; 
+	  @NotEmpty(message="내용을 입력하시므니다")
+	  @NotNull(message="내용을 입력하시므니다")	  
+	  private String  content; 
 	
-	private int replynum;
-	private int boardnum;
-	private String userid;
-	private Timestamp writedate;
 	
-	@NotEmpty(message="내용을 입력하세요")
-	@NotNull(message="내용을 입력하세요")	
-	private String content;
+	
+	
 }
