@@ -103,7 +103,8 @@ public class BoardController {
 			bvo.setEmail( multi.getParameter("email") );
 			bvo.setTitle(  multi.getParameter("title") );
 			bvo.setContent( multi.getParameter("content") );
-			bvo.setImgfilename( multi.getFilesystemName("imgfilename") );
+			if(multi.getFilesystemName("imgfilename")==null) bvo.setImgfilename("");
+			else bvo.setImgfilename(multi.getFilesystemName("imgfilename"));
 			
 			bs.insertBoard( bvo );
 			
