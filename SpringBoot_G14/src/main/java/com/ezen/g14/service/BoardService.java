@@ -73,7 +73,7 @@ public class BoardService {
 		result.put("board", bvo);
 		result.put("replyList", list);
 
-		
+		//수정필요
 		
 		return result;
 	}
