@@ -29,3 +29,21 @@ function boardCheck(){
 		return true;
 	}
 }
+
+
+function selectimg(){
+	var opt="toolbar=no, menubar=no,resizable=no,width=450,height=200"
+	window.open('selectimg','selectimg', opt);
+}
+
+
+function selectedimage(){
+	document.frm.submit();
+}
+
+
+
+
+
+
+
