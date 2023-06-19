@@ -16,4 +16,6 @@
     <fullyQualifiedTypeName name="com.ezen.g14.dto.OAuthToken"/>
     <fullyQualifiedTypeName name="com.ezen.g14.dto.KakaoProfile"/>
     <fullyQualifiedTypeName name="com.ezen.g14.dto.KakaoProfile.KakaoAccount.Profile"/>
+    <fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartRequest"/>
+    <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
 </qualifiedTypeNameHistroy>

@@ -13,8 +13,10 @@
 <body>
 	<div id="wrap" align="center">
 		<h1>게시글 등록</h1>
-		<form name="frm" method="post" action="boardWrite"
-			enctype="multipart/form-data">
+		<!-- <form name="frm" method="post" action="boardWrite"
+			enctype="multipart/form-data"> -->
+			<form name="frm" method="post" action="boardWrite">
+			
 			<table>
 				<tr>
 					<th>작성자</th>
@@ -42,12 +44,20 @@
 				</tr>
 				<tr>
 					<th>이미지</th>
-					<td><input type="file" name="imgfilename" /></td>
+					<!-- <td><input type="file" name="imgfilename" /> -->
+					<td>
+					<input type="button" value="파일선택" onclick="selectimg()">
+					<div id="image" style="float:left"></div>
+					<input type="hidden" name="imgfilename">
+						<img src ="" id="previewimg" width="150" style= "display:none"/> 
+						<!--img태그는 있는데 src가 없으면 엑박이 나올 수 도 있어 display:none으로 처리  -->
+					</td>
 				</tr>
 			</table>
-			<br> <br> <input type="submit" value="등록"> <input
-				type="reset" value="다시 작성"> <input type="button" value="목록"
-				onclick="location.href='main'">
+			<br> <br> 
+			<input type="submit" value="등록"> 
+			<input type="reset" value="다시 작성"> 
+			<input type="button" value="목록" onclick="location.href='main'">
 		</form>
 		<br>${message }
 	</div>
