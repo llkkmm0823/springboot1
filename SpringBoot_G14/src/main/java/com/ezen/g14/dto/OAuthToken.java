@@ -1,7 +1,6 @@
 package com.ezen.g14.dto;
 
 public class OAuthToken {
-
 	private String access_token;
 	private String token_type;
 	private String refresh_token;
@@ -80,6 +79,4 @@ public class OAuthToken {
 		this.scope = scope;
 		this.refresh_token_expires_in = refresh_token_expires_in;
 	}
-	
-	
 }

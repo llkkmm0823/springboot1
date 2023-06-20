@@ -1,11 +1,11 @@
 package com.ezen.g14.dto;
 
 public class KakaoProfile {
-
 	private String id;
-	public String getId() {
-		return id;
+    public String getId() {
+	   return id;
 	}
+	
 	private KakaoAccount kakao_account;
 	public KakaoAccount getAccount() { return kakao_account; }
 	
