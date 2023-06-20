@@ -15,4 +15,9 @@ public class MemberService {
 	public MemberVO getMember(String id) {
 		return mdao.getMember(id);
 	}
+
+	public void joinKakao(MemberVO mvo) {
+		mdao.joinKakao(mvo);
+		
+	}
 }

@@ -10,6 +10,10 @@
 	select * from member where id=#{param1}
 </select>
 
+<insert id="joinKakao" parameterType="com.ezen.g15.dto.MemberVO">
+	insert into member(id, email, name, provider)
+	values(#{id}, #{email} , #{name}, #{provider})
+</insert>
 
 
 

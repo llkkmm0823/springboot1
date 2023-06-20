@@ -8,5 +8,8 @@ import com.ezen.g15.dto.MemberVO;
 public interface IMemberDao {
 
 	MemberVO getMember(String id);
+
+
+	void joinKakao(MemberVO mvo);
 	
 }
