@@ -1,6 +1,6 @@
 @charset "UTF-8";
 body{ background:rgb(209, 226, 235); margin:0; padding:0; font-size:0.75em;  }
-#wrap { width: 971px;	text-align:left;	margin: 0 auto; background:rgb(209, 226, 235); min-height: 780px; }
+#wrap { width: 971px;	text-align:left;	margin: 0 auto; background:rgb(210 238 252); min-height: 780px; }
 
 #logo { float: left; width: 180px; height: 100px; margin: 40px 0 0 40px;}
 
@@ -38,7 +38,7 @@ footer #copy { 	margin: 5px 0 0 300px; 	width: 600px;	}
 
 
 #bestProduct { border: solid 3px #FFFFFF; border-radius: 10px;	width: 910px;	
-		min-height: 260px; background: rgb(209, 226, 235); padding: 10px;	text-align: center; margin:0 auto;}
+		min-height: 260px; background: rgb(210 238 252); padding: 10px;	text-align: center; margin:0 auto;}
 #item {	width: 200px;	float: left;	margin: 0 13px;	text-align: center; }
 #item img {	width: 190px;	height: 200px;	border-radius:20px 20px 20px 20px; 	overflow:hidden; 
 		border:3px solid gray;}
