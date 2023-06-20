@@ -793,3 +793,244 @@ java.lang.InterruptedException
 	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
 	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
 	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+
+!ENTRY org.eclipse.jface.text 2 0 2023-06-20 13:42:54.132
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
+!SESSION 2023-06-20 13:53:56.071 -----------------------------------------------
+eclipse.buildId=4.27.0.20230309-1200
+java.version=19.0.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.springframework.ide.eclipse.boot.dash.cf 4 0 2023-06-20 13:53:58.133
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.springframework.ide.eclipse.boot.dash.cf [1127]
+  Unresolved requirement: Require-Bundle: org.bouncycastle.bcprov; bundle-version="1.59.0"
+    -> Bundle-SymbolicName: org.bouncycastle.bcprov; bundle-version="1.72.0.v20221013-1810"
+       org.bouncycastle.bcprov [988]
+         No resolution report for the bundle.  Unresolved requirement: Require-Bundle: com.hierynomus.sshj; bundle-version="0.24.0"
+    -> Bundle-SymbolicName: com.hierynomus.sshj; bundle-version="0.24.0"
+       com.hierynomus.sshj [964]
+         Unresolved requirement: Import-Package: org.bouncycastle.util.encoders; version="[1.57.0,2.0.0)"; resolution:="optional"
+           -> Export-Package: org.bouncycastle.util.encoders; bundle-symbolic-name="org.bouncycastle.bcprov"; bundle-version="1.72.0.v20221013-1810"; version="1.72.0"
+         Unresolved requirement: Import-Package: org.bouncycastle.asn1; version="[1.57.0,2.0.0)"; resolution:="optional"
+           -> Export-Package: org.bouncycastle.asn1; bundle-symbolic-name="org.bouncycastle.bcprov"; bundle-version="1.72.0.v20221013-1810"; version="1.72.0"; uses:="org.bouncycastle.util"
+         Unresolved requirement: Import-Package: org.bouncycastle.jce.provider; version="[1.57.0,2.0.0)"; resolution:="optional"
+           -> Export-Package: org.bouncycastle.jce.provider; bundle-symbolic-name="org.bouncycastle.bcprov"; bundle-version="1.72.0.v20221013-1810"; version="1.72.0"; uses:="javax.crypto,javax.crypto.interfaces,javax.crypto.spec,javax.security.auth.x500,org.bouncycastle.asn1,org.bouncycastle.asn1.pkcs,org.bouncycastle.asn1.x500,org.bouncycastle.asn1.x509,org.bouncycastle.crypto,org.bouncycastle.crypto.params,org.bouncycastle.jcajce,org.bouncycastle.jcajce.provider.config,org.bouncycastle.jcajce.provider.util,org.bouncycastle.jce.exception,org.bouncycastle.jce.interfaces,org.bouncycastle.jce.spec,org.bouncycastle.math.ec,org.bouncycastle.util,org.bouncycastle.x509,org.bouncycastle.x509.util"
+         Unresolved requirement: Import-Package: org.bouncycastle.math.ec; version="[1.57.0,2.0.0)"; resolution:="optional"
+           -> Export-Package: org.bouncycastle.math.ec; bundle-symbolic-name="org.bouncycastle.bcprov"; bundle-version="1.72.0.v20221013-1810"; version="1.72.0"; uses:="org.bouncycastle.math.ec.endo,org.bouncycastle.math.field"
+         Unresolved requirement: Import-Package: org.bouncycastle.crypto.ec; version="[1.57.0,2.0.0)"; resolution:="optional"
+           -> Export-Package: org.bouncycastle.crypto.ec; bundle-symbolic-name="org.bouncycastle.bcprov"; bundle-version="1.72.0.v20221013-1810"; version="1.72.0"; uses:="org.bouncycastle.asn1,org.bouncycastle.asn1.x9,org.bouncycastle.crypto,org.bouncycastle.math.ec"
+         Unresolved requirement: Import-Package: org.bouncycastle.jce.spec; version="[1.57.0,2.0.0)"; resolution:="optional"
+           -> Export-Package: org.bouncycastle.jce.spec; bundle-symbolic-name="org.bouncycastle.bcprov"; bundle-version="1.72.0.v20221013-1810"; version="1.72.0"; uses:="org.bouncycastle.asn1.cryptopro,org.bouncycastle.jcajce.spec,org.bouncycastle.jce.interfaces,org.bouncycastle.math.ec"
+         Unresolved requirement: Import-Package: org.bouncycastle.asn1.x9; version="[1.57.0,2.0.0)"; resolution:="optional"
+           -> Export-Package: org.bouncycastle.asn1.x9; bundle-symbolic-name="org.bouncycastle.bcprov"; bundle-version="1.72.0.v20221013-1810"; version="1.72.0"; uses:="org.bouncycastle.asn1,org.bouncycastle.math.ec"
+         Unresolved requirement: Import-Package: org.bouncycastle.asn1.nist; version="[1.57.0,2.0.0)"; resolution:="optional"
+           -> Export-Package: org.bouncycastle.asn1.nist; bundle-symbolic-name="org.bouncycastle.bcprov"; bundle-version="1.72.0.v20221013-1810"; version="1.72.0"; uses:="org.bouncycastle.asn1,org.bouncycastle.asn1.x9"
+         Unresolved requirement: Import-Package: org.bouncycastle.crypto.prng; version="[1.57.0,2.0.0)"; resolution:="optional"
+           -> Export-Package: org.bouncycastle.crypto.prng; bundle-symbolic-name="org.bouncycastle.bcprov"; bundle-version="1.72.0.v20221013-1810"; version="1.72.0"; uses:="org.bouncycastle.crypto,org.bouncycastle.crypto.params"
+  Unresolved requirement: Require-Bundle: org.springsource.ide.eclipse.commons.cloudfoundry.client.v2
+    -> Bundle-SymbolicName: org.springsource.ide.eclipse.commons.cloudfoundry.client.v2; bundle-version="4.9.0.202012132012"
+       org.springsource.ide.eclipse.commons.cloudfoundry.client.v2 [1176]
+         No resolution report for the bundle.  Unresolved requirement: Require-Bundle: org.springframework.tooling.cloudfoundry.manifest.ls
+    -> Bundle-SymbolicName: org.springframework.tooling.cloudfoundry.manifest.ls; bundle-version="1.46.0.202305021750"; singleton:="true"
+       org.springframework.tooling.cloudfoundry.manifest.ls [1497]
+         No resolution report for the bundle.  Bundle was not resolved because of a uses constraint violation.
+  org.apache.felix.resolver.reason.ReasonException: Uses constraint violation. Unable to resolve resource org.springframework.ide.eclipse.boot.dash.cf [osgi.identity; type="osgi.bundle"; version:Version="4.9.0.202012132012"; osgi.identity="org.springframework.ide.eclipse.boot.dash.cf"; singleton:="true"] because it is exposed to package 'org.bouncycastle.asn1' from resources org.bouncycastle.bcprov [osgi.identity; type="osgi.bundle"; version:Version="1.72.0.v20221013-1810"; osgi.identity="org.bouncycastle.bcprov"] and bcprov [osgi.identity; type="osgi.bundle"; version:Version="1.72.0"; osgi.identity="bcprov"] via two dependency chains.
+
+Chain 1:
+  org.springframework.ide.eclipse.boot.dash.cf [osgi.identity; type="osgi.bundle"; version:Version="4.9.0.202012132012"; osgi.identity="org.springframework.ide.eclipse.boot.dash.cf"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=org.bouncycastle.bcprov)(bundle-version>=1.59.0))
+     |
+    provide: osgi.wiring.bundle: org.bouncycastle.bcprov
+  org.bouncycastle.bcprov [osgi.identity; type="osgi.bundle"; version:Version="1.72.0.v20221013-1810"; osgi.identity="org.bouncycastle.bcprov"]
+
+Chain 2:
+  org.springframework.ide.eclipse.boot.dash.cf [osgi.identity; type="osgi.bundle"; version:Version="4.9.0.202012132012"; osgi.identity="org.springframework.ide.eclipse.boot.dash.cf"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=org.bouncycastle.bcpkix)(bundle-version>=1.59.0))
+     |
+    provide: osgi.wiring.bundle; bundle-version:Version="1.72.0.v20221013-1810"; osgi.wiring.bundle="org.bouncycastle.bcpkix"
+  org.bouncycastle.bcpkix [osgi.identity; type="osgi.bundle"; version:Version="1.72.0.v20221013-1810"; osgi.identity="org.bouncycastle.bcpkix"]
+    import: (&(osgi.wiring.package=org.bouncycastle.asn1)(&(version>=1.72.0)(!(version>=1.73.0))))
+     |
+    export: osgi.wiring.package: org.bouncycastle.asn1
+  bcprov [osgi.identity; type="osgi.bundle"; version:Version="1.72.0"; osgi.identity="bcprov"]
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY ch.qos.logback.classic 1 0 2023-06-20 13:53:58.295
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY org.eclipse.equinox.app 0 0 2023-06-20 13:53:58.914
+!MESSAGE Product org.eclipse.epp.package.jee.product could not be found.
+
+!ENTRY ch.qos.logback.classic 1 0 2023-06-20 13:54:00.998
+!MESSAGE Logback config file: D:\JAVA01\springboot\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.1.100.20230106-1511.xml
+
+!ENTRY org.eclipse.jface 2 0 2023-06-20 13:54:03.566
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2023-06-20 13:54:03.566
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.jdt.ui.navigate.open.type"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.lsp4e.symbolinworkspace"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.jface.text 2 0 2023-06-20 13:54:04.746
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
+
+!ENTRY org.eclipse.egit.ui 2 0 2023-06-20 13:54:09.946
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\JAVA01'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.266
+!MESSAGE Boot project ADDED: SpringBoot_G01
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.267
+!MESSAGE Starting Boot LS...
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.292
+!MESSAGE Started Boot LS process
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.293
+!MESSAGE Boot project ADDED: SpringBoot_G02
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.293
+!MESSAGE Boot project ADDED: SpringBoot_G03
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.296
+!MESSAGE Boot project ADDED: SpringBoot_G04
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.296
+!MESSAGE Boot project ADDED: SpringBoot_G05
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.299
+!MESSAGE Boot project ADDED: SpringBoot_G06
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.301
+!MESSAGE Boot project ADDED: SpringBoot_G07
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.302
+!MESSAGE Boot project ADDED: SpringBoot_G08
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.302
+!MESSAGE Boot project ADDED: SpringBoot_G09
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.305
+!MESSAGE Boot project ADDED: SpringBoot_G10
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.306
+!MESSAGE Boot project ADDED: SpringBoot_G11
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.308
+!MESSAGE Boot project ADDED: SpringBoot_G12
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.311
+!MESSAGE Boot project ADDED: SpringBoot_G13
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.311
+!MESSAGE Boot project ADDED: SpringBoot_G14
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.312
+!MESSAGE Boot project ADDED: SpringBoot_G15_shop
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-20 13:54:10.325
+!MESSAGE DelegatingStreamConnectionProvider - Starting Boot LS
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2023-06-20 13:54:10.339
+!MESSAGE Started org.springframework.tooling.boot.ls LS process 1852
+
+!ENTRY org.eclipse.jface 2 0 2023-06-20 13:54:29.032
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2023-06-20 13:54:29.032
+!MESSAGE A conflict occurred for CTRL+SHIFT+C:
+Binding(CTRL+SHIFT+C,
+	ParameterizedCommand(Command(org.eclipse.tm4e.languageconfiguration.toggleLineCommentCommand,Toggle Line Comment,
+		,
+		Category(org.eclipse.tm4e.languageconfiguration.category,TM4E Language Configuration,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.tm4e.languageconfiguration.toggleLineCommentCommand"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(CTRL+SHIFT+C,
+	ParameterizedCommand(Command(org.springframework.tooling.boot.ls.ToggleComment,Toggle Comment,
+		,
+		Category(org.springframework.ide.eclipse.commands,Spring Generic Text Editor,Spring Language Server Commands,true),
+		WorkbenchHandlerServiceHandler("org.springframework.tooling.boot.ls.ToggleComment"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.wildwebdeveloper.xml 4 0 2023-06-20 13:55:11.086
+!MESSAGE Error while getting URI 'platform:/plugin/org.springframework.beans/org/springframework/beans/factory/xml/spring-beans.dtd' from plugin 'org.springframework.ide.eclipse.beans.ui.editor' : /org/springframework/beans/factory/xml/spring-beans.dtd
+!STACK 0
+java.io.FileNotFoundException: /org/springframework/beans/factory/xml/spring-beans.dtd
+	at org.eclipse.osgi.storage.url.bundleentry.Handler.findBundleEntry(Handler.java:55)
+	at org.eclipse.osgi.storage.url.BundleResourceHandler.openConnection(BundleResourceHandler.java:182)
+	at java.base/java.net.URL.openConnection(URL.java:1095)
+	at org.eclipse.core.internal.boot.PlatformURLConnection.connect(PlatformURLConnection.java:115)
+	at org.eclipse.core.internal.boot.PlatformURLConnection.getURLAsLocal(PlatformURLConnection.java:240)
+	at org.eclipse.core.internal.runtime.PlatformURLConverter.toFileURL(PlatformURLConverter.java:37)
+	at org.eclipse.core.runtime.FileLocator.toFileURL(FileLocator.java:266)
+	at org.eclipse.wildwebdeveloper.xml.internal.ui.preferences.XMLCatalogs.resolveURI(XMLCatalogs.java:154)
+	at org.eclipse.wildwebdeveloper.xml.internal.ui.preferences.XMLCatalogs.lambda$3(XMLCatalogs.java:71)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:1006)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at java.base/java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:276)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:1006)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.eclipse.wildwebdeveloper.xml.internal.ui.preferences.XMLCatalogs.getWTPExtensionCatalog(XMLCatalogs.java:67)
+	at org.eclipse.wildwebdeveloper.xml.internal.ui.preferences.XMLCatalogs.getAllCatalogs(XMLCatalogs.java:52)
+	at org.eclipse.wildwebdeveloper.xml.internal.ui.preferences.XMLPreferenceServerConstants.storePreferencesToLemminxOptions(XMLPreferenceServerConstants.java:193)
+	at org.eclipse.wildwebdeveloper.xml.internal.XMLLanguageServer.mergeCustomInitializationOptions(XMLLanguageServer.java:204)
+	at org.eclipse.wildwebdeveloper.xml.internal.XMLLanguageServer.getInitializationOptions(XMLLanguageServer.java:182)
+	at org.eclipse.lsp4e.LanguageServerWrapper.lambda$0(LanguageServerWrapper.java:263)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1760)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1311)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1840)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1806)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-06-20 13:55:13.798
+!MESSAGE [Info]	ESLint server running in node v18.13.0
+
+!ENTRY org.eclipse.lsp4e 2 0 2023-06-20 13:55:13.867
+!MESSAGE [Warning]	Using Typescript version (user-setting) 4.9.5 from path "C:\Users\JAVA01\.p2\pool\plugins\org.eclipse.wildwebdeveloper_1.0.2.202302250247\node_modules\typescript\lib\tsserver.js"
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-06-20 13:55:13.873
+!MESSAGE [Info]	Typescript Server version info: {version=4.9.5, source=user-setting}
