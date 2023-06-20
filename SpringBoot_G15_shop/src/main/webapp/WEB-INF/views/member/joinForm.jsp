@@ -7,7 +7,7 @@
 	<fieldset>
 		<legend>Basic Info</legend>
 			<label>User ID</label><input type="text" name="id" size="12"  value="${dto.id}" >
-	        <input type="hidden" name="reid"   value="${dto.reid}">
+	        <input type="hidden" name="reid"   value="${reid}">
 	        <input type="button" value="중복 체크" class="dup" onclick="idcheck()"><br>
 	        <label>Password</label><input type="password"  name="pwd"><br> 
 	        <label>Retype Password</label><input type="password"  name="pwdCheck"><br> 

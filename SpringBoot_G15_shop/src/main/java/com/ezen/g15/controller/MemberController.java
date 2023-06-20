@@ -207,4 +207,85 @@ public class MemberController {
         	return "member/idcheck";
         }
         
+        @RequestMapping(value="join", method=RequestMethod.POST)
+        public String join(
+        		@ModelAttribute("dto") @Valid MemberVO membervo,
+        		BindingResult result, Model model, HttpServletRequest request, 
+        		@RequestParam("reid") String reid, @RequestParam("pwdCheck") String pwdCheck) {
+        	
+        	model.addAttribute("reid", reid);
+        	String url="member/joinForm";
+        	
+        	if(result.getFieldError("id")!=null)
+        		model.addAttribute("message", result.getFieldError("id").getDefaultMessage());
+            else if(result.getFieldError("pwd")!=null)
+                    model.addAttribute("message", result.getFieldError("pwd").getDefaultMessage());
+            else if(result.getFieldError("name")!=null)
+                model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
+            else if(result.getFieldError("email")!=null)
+                model.addAttribute("message", result.getFieldError("email").getDefaultMessage());
+            else if(!reid.equals(membervo.getId()))
+                model.addAttribute("message", "id 중복체크를 하지 않았습니다");
+            else if(!pwdCheck.equals(membervo.getPwd()))
+                model.addAttribute("message", "비밀번호 확인이 일치하지 않습니다");
+            else {
+                model.addAttribute("message", "회원가입이 완료되었습니다. 로그인하세요");
+                ms.insertMember(membervo);
+                url = "member/login";
+            }
+        	
+        	return url;
+        }
+        
+        
+        
+        @RequestMapping("/memberEditForm")
+        public String member_Edit_Form(Model model, HttpServletRequest request) {
+        	
+        	HttpSession session  = request.getSession();
+        	MemberVO mvo=(MemberVO)session.getAttribute("loginUser");
+            model.addAttribute("dto", mvo);
+        	
+			return "member/memberUpdateForm";
+        	
+        }
+        
+        
+        
+        
+        @RequestMapping(value="memberUpdate", method=RequestMethod.POST)
+        public String memberUpdate(@ModelAttribute("member") @Valid MemberVO membervo,
+        		BindingResult result, Model model, HttpServletRequest request, 
+        		@RequestParam(value="pwdCheck", required=false) String pwdCheck) {
+        
+        	String url = "member/memberUpdateForm";
+        	
+        	if(membervo.getProvider().equals("")) {
+
+	        	if(result.getFieldError("pwd")!=null)
+	            	request.setAttribute("message", "비밀번호를 입력하세요");
+	        	else if(!pwdCheck.equals(membervo.getPwd()))
+	            	request.setAttribute("message", "비밀번호 확인이 일치하지 않습니다");
+	        	else if(result.getFieldError("name")!=null) {
+	        		request.setAttribute("message", result.getFieldError("name").getDefaultMessage());
+	        	}else {
+	        		ms.updateMember(membervo);
+	        		HttpSession session  = request.getSession();
+	        		session.setAttribute("loginUser", membervo);
+	        		url="redirect:/";
+	        	}
+	        	
+	        }else {
+        		
+	        	if(result.getFieldError("name")!=null)
+	        		request.setAttribute("message", result.getFieldError("name").getDefaultMessage());
+	        	else{
+	        		ms.updateMember(membervo);
+	        		HttpSession session  = request.getSession();
+	        		session.setAttribute("loginUser", membervo);
+	        		url="redirect:/";
+	        	}
+		   }
+	     return url;
+        }        
 }
