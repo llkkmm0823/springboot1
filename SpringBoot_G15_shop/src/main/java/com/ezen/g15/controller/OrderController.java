@@ -27,6 +27,8 @@ public class OrderController {
 		int oseq=0;
 		if(mvo==null) {
 			mav.setViewName("member/login");
+		}else if(mvo.getZip_num()==null || mvo.getAddress1()==null || mvo.getAddress2()==null) {
+			mav.setViewName("redirect:/memberEditForm");
 		}else {
 			HashMap<String,Object> result = os.insertOrder(mvo.getId());
 			//총 주문 금액

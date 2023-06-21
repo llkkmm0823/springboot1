@@ -5,4 +5,34 @@
     
 <mapper namespace="com.ezen.g15.dao.IOrderDao">
 
+<insert id="insertOrders" parameterType="com.ezen.g15.dto.OrderVO">
+                Insert into orders(oseq, id)
+                values(orders_seq.nextval, #{id})
+</insert>
+
+<select id="LookupMaxOseq" parameterType="com.ezen.g15.dto.OrderVO">
+
+
+</select>
+
+<insert id="insertOrderDetail" parameterType="com.ezen.g15.dto.OrderVO">
+          Insert into order_detail(odseq, quantity, oseq, pseq )
+          values(order_detail_seq.nextval, #{quantity}, #{oseq} , #{pseq})
+</insert>
+
+
+<delete id="deleteCart">
+	delete from cart where cseq=#{param1}
+</delete>
+
+
+
+
+
+
+
+
+
+
+
 </mapper>
