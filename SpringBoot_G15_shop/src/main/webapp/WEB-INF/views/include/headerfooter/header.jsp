@@ -34,7 +34,7 @@
 				</c:choose>
 				<li><a href="cartList">CART</a></li>
 				<li><a href="myPage">MY PAGE</a></li>
-		    	<li ><a href="qnaList">고객센터</a></li>
+		    	<li ><a href="customer">고객센터</a></li>
 		    	<!-- <li ><a href="admin">admin</a></li> -->
 			</ul>
 		</nav>

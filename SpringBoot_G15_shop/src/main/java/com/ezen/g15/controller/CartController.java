@@ -25,7 +25,7 @@ public class CartController {
 	@RequestMapping("/cartInsert")
 	public String cartInsert(
 			@RequestParam("pseq") int pseq,
-			@RequestParam("pseq") int quantity,
+			@RequestParam("quantity") int quantity,
 			HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
