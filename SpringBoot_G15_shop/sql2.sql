@@ -199,10 +199,14 @@ select * from new_pro_view
 
 commit
 
+alter table qna add pass varchar2(30);
+alter table qna add passCheck char(1) default'N';
 
 
+update qna set passCheck='N';
+select*from qna;
 
-
+update qna set pass='1234', passcheck='Y' where qseq=5;
 
 
 
