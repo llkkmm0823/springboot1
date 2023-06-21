@@ -2,6 +2,8 @@ package com.ezen.g15.service;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +20,13 @@ public class QnaService {
 		return qdao.listQna();
 	}
 
-	public Object getQna(int qseq) {
+	public QnaVO getQna(int qseq) {
 		return qdao.getQna(qseq);
 	}
 
-	
+	public void insertQna(QnaVO qnavo) {
+		qdao.insertQna(qnavo);
+
+	}
+
 }

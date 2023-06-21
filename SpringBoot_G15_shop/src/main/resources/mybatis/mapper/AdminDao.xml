@@ -5,4 +5,8 @@
     
 <mapper namespace="com.ezen.g15.dao.IAdminDao">
 
+<select id ="getPwd" resultType="string">
+	select pwd from worker where id=#{param1}
+</select>
+
 </mapper>

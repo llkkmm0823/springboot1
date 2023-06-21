@@ -13,4 +13,11 @@
 	select *from qna where qseq=#{param1}
 </select>
 
+<insert id="insertQna" parameterType="com.ezen.g15.dto.QnaVO">
+	insert into qna (qseq, subject, content, id , passcheck, pass)
+	values(qna_seq.nextVal,#{subject},#{content},#{id},#{passcheck},#{pass})
+</insert>
+
+
+
 </mapper>

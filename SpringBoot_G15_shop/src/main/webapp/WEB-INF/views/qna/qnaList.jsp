@@ -4,7 +4,7 @@
 <article>
 <h2> 1:1 고객 게시판 </h2>
 <h3> 고객님의 질문에 대해서 운영자가 1:1 답변을 드립니다.</h3>
-	<form name="formm" method="post">
+	<form name="formm" method="post" action="qnaWrite">
 		<table id="cartList">
 			<tr><th>번호</th><th>제목</th> <th>등록일</th><th>답변 여부</th></tr>
       		<c:forEach items="${qnaList}"  var="qnaVO">
@@ -12,8 +12,7 @@
       			<td>
       				<c:choose>
       					<c:when test="${qnaVO.passcheck == 'Y' }">
-      					<a href="#" onClick="passCheck('${qnaVO.qseq}')"></a>
-      					<a>${qnaVO.subject}</a>
+      					<a href="#" onClick="passCheck('${qnaVO.qseq}')">${qnaVO.subject}</a>
       					&nbsp;<img src="/images/key.png" style="width:20px; vertical-align:middle">
       					</c:when>
 	      				<c:otherwise>

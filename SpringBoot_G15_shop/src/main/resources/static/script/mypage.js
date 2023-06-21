@@ -62,9 +62,21 @@ function withdrawalConfirm() {
 
 
 
+function passCheck(qseq){
+	var url ="passCheck?qseq=" + qseq;
+	var opt = "toolbar=no, menubar=no, resizable=no, width=500, height=250, scrollbars=no";
+	window.open(url,"passCheck",opt);
+	
+}
 
-
-
+function enabled(){
+	if (document.formm.check.checked==true){
+		document.formm.pass.disabled = false;
+	}else{
+		document.formm.pass.disabled = true;
+		document.formm.pass.value="";
+	}
+}
 
 
 

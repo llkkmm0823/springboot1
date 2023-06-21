@@ -11,6 +11,8 @@ public interface IQnaDao {
 
 	List<QnaVO> listQna();
 
-	Object getQna(int qseq);
+	QnaVO getQna(int qseq);
+
+	void insertQna(QnaVO qnavo);
 
 }
