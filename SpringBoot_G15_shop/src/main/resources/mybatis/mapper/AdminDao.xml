@@ -9,4 +9,18 @@
 	select pwd from worker where id=#{param1}
 </select>
 
+<select id ="getAllCount" resultType="_int">
+	select*from ${param1}  where like ${param2} '%'||#{param3}||'%'
+</select>
+
+<select id ="listProduct" resultType="com.ezen.g15.dto.ProductVO">
+	select*from( 
+	select*from( 
+	select rownum as rn,p.*from
+	((select*from product where name like '%'||#{param2}||'%' order by pseq desc)p) 
+	)where rn &gt; = #{param1.startNum}
+		)where rn &lt; = #{param1.endNum}
+	
+</select>
+
 </mapper>
