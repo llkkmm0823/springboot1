@@ -23,5 +23,15 @@
 		) where rn &lt;= #{param1.endNum} 
 	</select>
 	
+	<insert id = "insertProduct" parameterType="com.ezen.g15.dto.ProductVO">
+	insert into product (pseq, kind, name, price1, price2, price3, content, image)
+	values(product_seq.nextVal,#{kind},#{name},#{price1},#{price2},#{price3},#{content},#{image})
+	</insert>
+	
+	<update id="updateProduct" parameterType="com.ezen.g15.dto.ProductVO">
+	update product set kind = #{kind}, useyn=#{useyn},name=#{name},price1=#{price1},
+	price2=#{price2},price3=#{price3},content=#{content},image=#{image},bestyn=#{bestyn} where pseq=#{pseq}
+	</update>
+	
 	
 </mapper>

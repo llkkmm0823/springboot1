@@ -5,7 +5,6 @@
     <fullyQualifiedTypeName name="org.springframework.validation.Validator"/>
     <fullyQualifiedTypeName name="javax.validation.Valid"/>
     <fullyQualifiedTypeName name="javax.validation.constraints.NotEmpty"/>
-    <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
     <fullyQualifiedTypeName name="org.springframework.jdbc.core.RowMapper"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
@@ -15,7 +14,6 @@
     <fullyQualifiedTypeName name="com.ezen.g14.dto.OAuthToken"/>
     <fullyQualifiedTypeName name="com.ezen.g14.dto.KakaoProfile"/>
     <fullyQualifiedTypeName name="com.ezen.g14.dto.KakaoProfile.KakaoAccount.Profile"/>
-    <fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartRequest"/>
     <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
     <fullyQualifiedTypeName name="java.net.URL"/>
     <fullyQualifiedTypeName name="com.ezen.g15.dto.KakaoProfile.KakaoAccount.Profile"/>
@@ -24,4 +22,6 @@
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.ezen.g15.dto.CartVO"/>
     <fullyQualifiedTypeName name="com.ezen.g15.dto.OrderVO"/>
+    <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
+    <fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartRequest"/>
 </qualifiedTypeNameHistroy>

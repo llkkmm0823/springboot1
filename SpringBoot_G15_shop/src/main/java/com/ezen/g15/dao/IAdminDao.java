@@ -16,5 +16,9 @@ public interface IAdminDao {
 
 	List<ProductVO> listProduct(Paging paging, String key);
 
+	void insertProduct(ProductVO productvo);
+
+	void updateProduct(ProductVO productvo);
+
 	
 }

@@ -31,11 +31,12 @@ $(function(){
 	        //여기까지가 설정을 넣어 전송하는 코드
 	        
 	        
-	        success : function(data){
+	        success : function(data){	//controller에서 리턴된 해시맵이 data로 전달됨
 	            if(data.STATUS == 1){  	//동적으로 div태그 달아주기.
 	            	$("#filename").append("<div>"+data.FILENAME+"</div>");
 	            	$("#image").val(data.FILENAME);
 	            	$("#filename").append("<img src='product_images/"+data.FILENAME+"' height='150'/>");
+	            	//이름도 쓰고 미리보기 이미지 태그도 넣어주고
 	            }
 	        },
 	        error: function() {				alert("실패");			}

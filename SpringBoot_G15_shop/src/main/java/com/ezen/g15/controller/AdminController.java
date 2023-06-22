@@ -7,20 +7,24 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.g15.dto.Paging;
 import com.ezen.g15.dto.ProductVO;
 import com.ezen.g15.service.AdminService;
+import com.ezen.g15.service.ProductService;
+import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
@@ -101,7 +105,7 @@ public class AdminController {
 	@RequestMapping("/productWriteForm")
 	public String product_write_form(HttpServletRequest request, Model model) {
 		String kindList[] = {"Heels","Boots","Sandals","Snickers","Slipers","Sale"};
-		model.addAttribute(kindList);
+		model.addAttribute("kindList",kindList);
 		return "admin/product/productWriteForm";
 		
 	}
@@ -121,19 +125,109 @@ public class AdminController {
 		
 		try {
 			MultipartRequest multi = new MultipartRequest(
-					request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy() );
+					request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy() 
+					);
 			result.put("STATUS",1);
-			result.put("FILENAME",multi.getFilesystemName("fileimage"));
+			result.put("FILENAME", multi.getFilesystemName("fileimage"));
 
 		} catch (IOException e) {  e.printStackTrace();
 		}
 		return result;
-		
-		
-		
+	
 	}
 	
+	@RequestMapping(value="/productWrite", method = RequestMethod.POST)
+	public String productWrite(@ModelAttribute("dto") @Valid ProductVO productvo,
+			BindingResult result, Model model, HttpServletRequest request) {
+		
+		
+		String url = "admin/product/productWriteForm";
+		
+		if(result.getFieldError("name")!=null)
+			model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
+		else if(result.getFieldError("price2")!=null)
+			model.addAttribute("message", result.getFieldError("price2").getDefaultMessage());
+		else if(result.getFieldError("content")!=null)
+			model.addAttribute("message", result.getFieldError("content").getDefaultMessage());
+		else if(result.getFieldError("image")!=null)
+			model.addAttribute("message", result.getFieldError("image").getDefaultMessage());
+		else {
+			as.insertProduct(productvo);
+			url = "redirect:/productList";
+		}
+		
+		return "redirect:/productList";
+		
+	}
+	@Autowired
+	ProductService ps;
+	
+	@RequestMapping("adminProductDetail")
+	public ModelAndView product_detail(
+										HttpServletRequest request, 
+										@RequestParam("pseq") int pseq) 
+	{
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("productVO", ps.getProduct(pseq));
+
+		String kindList[] = { "0", "Heels", "Boots", "Sandals", "Slipers", "Shcakers", "Sale" };
+		int index = Integer.parseInt( ps.getProduct(pseq).getKind() );
+		
+		mav.addObject("kind", kindList[index]);
+		mav.setViewName("admin/product/productDetail");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/productUpdateForm")
+	public ModelAndView product_update_form( 
+			HttpServletRequest request,
+			@RequestParam("pseq") int pseq, Model model) {
+		ModelAndView mav = new ModelAndView();
+		model.addAttribute("productVO", ps.getProduct(pseq));
+		String kindList[] = { "Heels", "Boots", "Sandals", "Slipers", "Shcakers", "Sale" };    
+		mav.addObject("kindList", kindList);
+		mav.setViewName("admin/product/productUpdate");
+		return mav;
+	}
+	
+	
+	@RequestMapping(value="/productUpdate", method = RequestMethod.POST)
+	public String productUpdate(@ModelAttribute("dto") @Valid ProductVO productvo,
+			BindingResult result, Model model, HttpServletRequest request) {
+		
+		
+		String url = "admin/product/productUpdate";
+		
+		if(result.getFieldError("name")!=null)
+			model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
+		else if(result.getFieldError("price2")!=null)
+			model.addAttribute("message", result.getFieldError("price2").getDefaultMessage());
+		else if(result.getFieldError("content")!=null)
+			model.addAttribute("message", result.getFieldError("content").getDefaultMessage());
+		else if(result.getFieldError("image")!=null)
+			model.addAttribute("message", result.getFieldError("image").getDefaultMessage());
+		else {
+			
+			if(request.getParameter("bestyn")!=null)
+				productvo.setBestyn("Y");
+			else productvo.setBestyn("N");
+			
+			if(request.getParameter("useyn")!=null)
+				productvo.setUseyn("Y");
+			else productvo.setUseyn("N");
+
+			
+			if(productvo.getImage()==null || productvo.getImage().equals(""))
+				productvo.setImage(request.getParameter("oldfilename"));
+			else {
+			
+			as.updateProduct(productvo);
+			url = "redirect:/adminProductDetail?pseq=" + productvo.getPseq();
+		}
+	}
+		
+		return url;
+		
+	}
 }
-
-
-

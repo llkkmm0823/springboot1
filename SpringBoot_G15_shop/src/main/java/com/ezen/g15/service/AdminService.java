@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,5 +88,14 @@ public class AdminService {
 
 		
 		return result;
+	}
+
+	public void insertProduct(ProductVO productvo) {
+		adao.insertProduct(productvo);
+		
+	}
+
+	public void updateProduct(ProductVO productvo) {
+		adao.updateProduct(productvo);
 	}
 }
