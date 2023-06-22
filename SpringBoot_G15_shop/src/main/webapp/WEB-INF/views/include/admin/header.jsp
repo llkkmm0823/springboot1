@@ -12,11 +12,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('#myButton').click( function(){
+	$('#myButton').click( function(){ // mybutton을 클릭하면 여기서부터 이 함수를 시작해주세요 라는 뜻
+		
 		var formselect = $("#fileupForm")[0];   // 지목된 폼을 변수에 저장
 		var formdata = new FormData(formselect);   // 전송용 폼객에 다시 저장
+		
+		//에이잭스코드 시작
 		$.ajax({    // 웹페이지 이동 또는 새로고침이 필요없는 request요청
-			url:"<%=request.getContextPath() %>/fileup",
+			url:"<%=request.getContextPath() %>/fileup", /*현재 주소(위치)의 fileup리퀘스트로 요청 http://localhost:8070/fileup  */
+			/*  request.getContextPath() 이 자리에 도메인을 넣어도 상관없음 */
 			type:"POST",
 			enctype:"multipart/form-data",
 			async: false,
@@ -24,6 +28,9 @@ $(function(){
 	    	timeout: 10000,
 	    	contentType : false,
 	        processData : false,
+	        //여기까지가 설정을 넣어 전송하는 코드
+	        
+	        
 	        success : function(data){
 	            if(data.STATUS == 1){  	//동적으로 div태그 달아주기.
 	            	$("#filename").append("<div>"+data.FILENAME+"</div>");

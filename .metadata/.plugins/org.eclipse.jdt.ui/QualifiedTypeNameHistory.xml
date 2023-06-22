@@ -22,4 +22,6 @@
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.ezen.g15.dto.CartVO"/>
+    <fullyQualifiedTypeName name="com.ezen.g15.dto.OrderVO"/>
 </qualifiedTypeNameHistroy>
