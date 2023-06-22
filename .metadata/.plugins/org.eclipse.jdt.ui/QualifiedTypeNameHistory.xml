@@ -14,7 +14,6 @@
     <fullyQualifiedTypeName name="com.ezen.g14.dto.OAuthToken"/>
     <fullyQualifiedTypeName name="com.ezen.g14.dto.KakaoProfile"/>
     <fullyQualifiedTypeName name="com.ezen.g14.dto.KakaoProfile.KakaoAccount.Profile"/>
-    <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
     <fullyQualifiedTypeName name="java.net.URL"/>
     <fullyQualifiedTypeName name="com.ezen.g15.dto.KakaoProfile.KakaoAccount.Profile"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
@@ -24,4 +23,5 @@
     <fullyQualifiedTypeName name="com.ezen.g15.dto.OrderVO"/>
     <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
     <fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartRequest"/>
+    <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
 </qualifiedTypeNameHistroy>
