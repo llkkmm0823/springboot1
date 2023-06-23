@@ -19,8 +19,7 @@ public class MemberService {
 	}
 
 	public void joinKakao(MemberVO mvo) {
-		mdao.joinKakao(mvo);
-		
+		mdao.joinKakao( mvo );		
 	}
 
 	public void insertMember(MemberVO membervo) {
@@ -28,7 +27,11 @@ public class MemberService {
 	}
 
 	public void updateMember(MemberVO membervo) {
-		mdao.updateMember(membervo);
+		mdao.updateMember( membervo );
 		
+	}
+
+	public void withdrawalMember(String id) {
+		mdao.withDrawalMember(id);		
 	}
 }

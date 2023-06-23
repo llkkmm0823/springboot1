@@ -14,7 +14,6 @@ public class KakaoProfile {
 		private Profile profile;
 		private String email;
 		private boolean has_email;
-		
 		public Profile getProfile() {
 			return profile;
 		}
@@ -34,12 +33,9 @@ public class KakaoProfile {
 			this.has_email = has_email;
 		}
 		
-		
 		public class Profile{
-			
 			private String nickname;
 			private String profile_image_url;
-			
 			public String getNickname() {
 				return nickname;
 			}

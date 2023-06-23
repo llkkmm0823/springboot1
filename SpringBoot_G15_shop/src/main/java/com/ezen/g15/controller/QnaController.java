@@ -26,17 +26,16 @@ public class QnaController {
 	
 	@RequestMapping("/customer")
 	public String customer() {
-		
 		return "qna/intro";
 	}
 	
 	
-	@RequestMapping("/qnaList")
-	public ModelAndView qna_list(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
+	@RequestMapping("qnaList")
+	public ModelAndView qna_list( HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
 	    MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
+	    ModelAndView mav = new ModelAndView();
 	    if (mvo == null) mav.setViewName("member/login");
 	    else {
 	    	mav.addObject("qnaList", qs.listQna() );
@@ -46,81 +45,108 @@ public class QnaController {
 	}
 	
 	@RequestMapping("/qnaView")
-	public ModelAndView qna_view( HttpServletRequest request,@RequestParam("qseq") int qseq) {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView qna_view( HttpServletRequest request, @RequestParam("qseq") int qseq) {
 		HttpSession session = request.getSession();
 	    MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
+	    ModelAndView mav = new ModelAndView();
 		if (mvo == null) mav.setViewName("member/login");
 		else {
-			mav.addObject("qnaVO", qs.getQna(qseq));
+			mav.addObject("qnaVO", qs.getQna(qseq) );
 			mav.setViewName("qna/qnaView");
 		}
 		return mav;
 	}
 	
+	
+	
 	@RequestMapping("/passCheck")
-	public ModelAndView passCheck(@RequestParam("qseq") int qseq) {
+	public ModelAndView passCheck( @RequestParam("qseq") int qseq ) {
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("qseq", qseq);
 		mav.setViewName("qna/checkPass");
 		
 		return mav;
 	}
-	@RequestMapping(value = "/qnaCheckPass",method=RequestMethod.POST)
-	public String qnaCheckPass(@RequestParam("qseq") int qseq, @RequestParam("pass") String pass, Model model) {
-		
+	
+	
+	@RequestMapping(value="/qnaCheckPass", method=RequestMethod.POST)
+	public String qnaCheckPass( 
+			@RequestParam("qseq") int qseq, 
+			@RequestParam("pass") String pass, Model model ) {
+
 		QnaVO qvo = qs.getQna(qseq);
-		model.addAttribute("qseq",qseq);
+		model.addAttribute("qseq" , qseq);
 		
-		if(qvo.getPass().equals(pass)) {
+		if( qvo.getPass().equals(pass) ) {
 			return "qna/checkPassSuccess";
 		}else {
-			model.addAttribute("message","비밀번호가 맞지않습니다");
-			return"qna/checkPass";
+			model.addAttribute("message", "비밀번호가 맞지 않습니다");
+			return "qna/checkPass";
 		}
+			
 	}
 	
+	
+	
 	@RequestMapping("/qnaWriteForm")
-	public String qna_Write_Form(Model model,HttpServletRequest request) {
+	public String qna_writre_form(Model model, HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
-	    MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
+	    MemberVO mvo= (MemberVO) session.getAttribute("loginUser");    	    
+	    
 	    if (mvo == null) return "member/login";
-
 	    return "qna/qnaWrite";
 	}
 	
-	@RequestMapping(value = "/qnaWrite",method=RequestMethod.POST)
-	public ModelAndView qna_Write(
+	
+	@RequestMapping(value="/qnaWrite", method=RequestMethod.POST)
+	public ModelAndView qna_write(
 						@ModelAttribute("dto") @Valid QnaVO qnavo,
-						@RequestParam(value="pass" , required=false) String pass,
-						@RequestParam(value="check" , required=false) String check,
-						BindingResult result, HttpServletRequest request) {
+						@RequestParam(value="pass", required=false) String pass,
+						@RequestParam(value="check", required=false) String check,
+						BindingResult result,  HttpServletRequest request	) {
+		
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
-	    MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
-		if (mvo == null) {
+		MemberVO mvo = (MemberVO)session.getAttribute("loginUser");
+		if( mvo == null ) {
 			mav.setViewName("member/login");
 		}else {
 			
-			if(result.getFieldError("subject")!=null)
-				mav.addObject("message" , result.getFieldError("subject").getDefaultMessage());
-			else if(result.getFieldError("content")!=null)
-				mav.addObject("message" , result.getFieldError("content").getDefaultMessage());
-			else {
-				if(check==null) {
-					qnavo.setPasscheck("N");
-					qnavo.setPass("");
-				}else {
-					qnavo.setPasscheck("Y");
-					qnavo.setPass(pass);
-				}
-				qnavo.setId(mvo.getId());
-				qs.insertQna(qnavo);
-				mav.setViewName("redirect:/qnaList");
-			}
+			if(result.getFieldError("subject") != null ) 
+	    		mav.addObject("message", result.getFieldError("subject").getDefaultMessage() );
+	    	else if(result.getFieldError("content") != null )
+	    		mav.addObject("message", result.getFieldError("content").getDefaultMessage());
+	    	else {
+	    		if( check == null ) {
+	    			qnavo.setPasscheck( "N" );
+	    			qnavo.setPass("");
+	    		}else {
+	    			qnavo.setPasscheck( "Y" );
+	    			qnavo.setPass(pass);
+	    		}
+	    		qnavo.setId( mvo.getId() );
+	    		qs.insertQna( qnavo );
+	    		mav.setViewName("redirect:/qnaList");
+	    	}
 		}
 		return mav;
-	
 	}
+			
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

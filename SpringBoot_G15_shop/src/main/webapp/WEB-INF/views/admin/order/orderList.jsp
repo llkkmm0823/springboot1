@@ -39,7 +39,7 @@
 					</c:choose>
 				</td>
 				<td>${orderVO.mname}(${orderVO.id})</td><td>${orderVO.pname}</td><td>${orderVO.quantity}</td>
-				<td>${orderVO.ZIP_NUM}</td>
+				<td>${orderVO.zip_num}</td>
 				<td  style="text-align:left">${orderVO.address1} ${orderVO.address2}</td> <td>${orderVO.phone}</td>
 				<td><fmt:formatDate value="${orderVO.indate}" /></td></tr>
 		</c:forEach>

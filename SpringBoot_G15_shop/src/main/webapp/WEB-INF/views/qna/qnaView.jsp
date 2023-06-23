@@ -7,11 +7,14 @@
 <h3> 고객님의 질문에 대해서 운영자가 1:1 답변을 드립니다.</h3>
 	<form name="formm" method="post">
 	<table width="600">
-		<tr><th width="100" align="center">제목</th><td  style="text-align:left; font-size:120%">${qnaVO.subject}</td></tr>
+		<tr><th width="100" align="center">제목</th>
+				<td  style="text-align:left; font-size:120%">${qnaVO.subject}</td></tr>
 		<tr><th align="center">등록일</th>
-			<td style="text-align:left;"><fmt:formatDate value="${qnaVO.indate}" type="date"/></td></tr>
-		<tr><th align="center">질문내용</th><td  style="text-align:left; font-size:120%"><pre>${qnaVO.content}</pre></td></tr>
-		<tr><th align="center">답변 내용</th><td  style="text-align:left; font-size:120%">${qnaVO.reply}</tr>
+				<td style="text-align:left;"><fmt:formatDate value="${qnaVO.indate}" type="date"/></td></tr>
+		<tr><th align="center">질문내용</th>
+				<td  style="text-align:left; font-size:120%"><pre>${qnaVO.content}</pre></td></tr>
+		<tr><th align="center">답변 내용</th>
+				<td  style="text-align:left; font-size:120%">${qnaVO.reply}</tr>
 		</table>
 		<div class="clear"></div>
 		<div id="buttons" style="float:right">

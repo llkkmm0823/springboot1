@@ -11,8 +11,6 @@ function worker_check()
 }
 
 
-
-
 function go_search( requestName ){
 	if( document.frm.key.value=="") return;
 	document.frm.action = requestName + "?page=1";
@@ -76,6 +74,8 @@ function go_detail(pseq){
 }
 
 
+
+
 function go_mod(pseq){
 	document.frm.action = "productUpdateForm?pseq=" + pseq;
 	document.frm.submit();
@@ -119,12 +119,15 @@ function go_order_save(){
 		}
 	}
 	if( count == 0) {
-		alert("삭제할 항목을 선택해 주세요.");
+		alert("항목을 선택해 주세요.");
 	}else{
 		document.frm.action = "orderUpdateResult";
 		document.frm.submit();
 	}
 }
+
+
+
 
 
 
@@ -177,10 +180,9 @@ function change_order( bseq ){
 	var selectVal = selectTag.options[ selectTag.selectedIndex ].value;
 	// 식별한 SELECT 태그의 선택된 인덱스값으로 선택된 값을 추출합니다
 	
-	location.href='chane_order?bseq=' + bseq + '&changeval=' + selectVal;
+	location.href='change_order?bseq=' + bseq + '&changeval=' + selectVal;
 	// BSEQ 와 바꾸려는 값을 갖고 change_order 리퀘스트로 이동합니다
 }
-
 
 
 function go_banner_update(){
