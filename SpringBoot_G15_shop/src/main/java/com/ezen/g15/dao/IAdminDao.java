@@ -20,7 +20,7 @@ public interface IAdminDao {
 	int getAllCount(String string, String string2, String key);
 	List<ProductVO> listProduct(Paging paging, String key);
 	void insertProduct(ProductVO productvo);
-	void updateProduct(@Valid ProductVO productvo);
+	void updateProduct(ProductVO productvo);
 	List<OrderVO> listOrder(Paging paging, String key);
 	List<QnaVO> listQna(Paging paging, String key);
 	List<MemberVO> listMember(Paging paging, String key);

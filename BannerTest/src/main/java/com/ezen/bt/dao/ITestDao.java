@@ -10,7 +10,7 @@ import com.ezen.bt.dto.BannerVO;
 public interface ITestDao {
 
 	List<BannerVO> getBannerList();
-	void insertBanner();
+	void insertBanner(BannerVO bannervo);
 	List<BannerVO> getBannerListFive();
-
+	
 }

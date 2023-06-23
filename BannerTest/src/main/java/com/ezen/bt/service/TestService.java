@@ -15,16 +15,14 @@ public class TestService {
 	ITestDao tdao;
 
 	public List<BannerVO> getBannerList() {
-		//return tdao.getBannerList();
-		return null;
+		return tdao.getBannerList();
 	}
 
 	public void insertBanner(BannerVO bannervo) {
-		//tdao.insertBanner();
+		tdao.insertBanner(bannervo);
 	}
 
 	public List<BannerVO> getBannerListFive() {
-		//return tdao.getBannerListFive();
-		return null;
+		return tdao.getBannerListFive();
 	}
 }

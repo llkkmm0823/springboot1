@@ -13,7 +13,7 @@ create sequence order_detail_seq start with 1;
 drop sequence qna_seq;
 create sequence qna_seq start with 1;
 
-delete from banner where bseq=7
+delete from banner where bseq=6
 select*from banner
 ------------------------------------------------ 샘플 데이터 입력------------------------------------
 

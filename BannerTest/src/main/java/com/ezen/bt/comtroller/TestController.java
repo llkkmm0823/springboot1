@@ -50,7 +50,7 @@ public class TestController {
 		
 		// xml 파일의  insertBanner  기능을 완성하세요 
 		ts.insertBanner( bannervo );
-		return "redirect:";
+		return "redirect:/";
 	}
 	
 	
@@ -83,6 +83,7 @@ public class TestController {
 		
 		// xml 파일의  배너 조회  기능을 완성하세요 
 		mav.addObject("bannerList", ts.getBannerListFive() );
+		mav.addObject("size", ts.getBannerListFive().size() );
 		mav.setViewName("rollingBanner");
 		return mav;
 	}
