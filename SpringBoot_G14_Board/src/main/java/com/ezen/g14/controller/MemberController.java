@@ -44,7 +44,7 @@ public class MemberController {
 	public String root() {
 		return "member/loginForm";
 	}
-	
+	//SPRING BOOT의 DAO역할을 하는 controller
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login( @ModelAttribute("dto") @Valid MemberVO membervo ,
 								  BindingResult result,  
