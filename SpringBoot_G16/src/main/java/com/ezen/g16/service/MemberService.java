@@ -17,6 +17,10 @@ public class MemberService {
 		mdao.getMember( paramMap );
 	}
 
+	public void joinKakao(HashMap<String, Object> paramMap) {
+		mdao.joinKakao( paramMap );
+	}
+
 	
 }
 

@@ -66,6 +66,19 @@ SELECT * FROM BOARD;
 ALTER TABLE BOARD ADD REPLYCNT NUMBER(5);
 
 
+CREATE OR REPLACE PROCEDURE joinKakao(
+    p_userid member.userid%type,
+    p_email member.email%type,
+    p_name member.name%type,
+    p_provider member.provider%type,
+
+)
+IS
+BEGIN
+    INSERT INTO member (userid, name, email, provider)
+    VALUES(p_userid,p_email,p_name,p_provider);
+    COMMIT;
+END;
 
 
 
