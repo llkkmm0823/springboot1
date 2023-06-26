@@ -23,7 +23,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.g16.dto.KakaoProfile;
 import com.ezen.g16.dto.KakaoProfile.KakaoAccount;
@@ -206,4 +208,139 @@ public class MemberController {
                 return "redirect:/main";
         }
 
+        @RequestMapping("/memberJoinForm")
+    	public String join_form() {
+    		return "member/memberJoinForm";
+    	}
+        
+        @RequestMapping("/idcheck")
+        public ModelAndView idcheck(@RequestParam("userid") String userid) {
+        	ModelAndView mav = new ModelAndView();
+        	
+        	HashMap<String, Object> paramMap = new HashMap<String, Object>();
+            paramMap.put("userid", userid);
+            paramMap.put("ref_cursor", null);
+            ms.getMember(paramMap);
+            ArrayList<HashMap<String, Object>> list 
+            = (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+            if (list == null || list.size()==0 ) 
+            	mav.addObject("result",-1);
+            else 
+				mav.addObject("result",1);
+				
+            	mav.addObject("userid",userid);
+            	mav.setViewName("member/idcheck");
+            
+        	return mav;
+        }
+        @RequestMapping(value = "memberJoin", method=RequestMethod.POST)
+    	public ModelAndView memberJoin(
+    					@ModelAttribute("dto") @Valid MemberVO membervo,BindingResult result, 
+    					@RequestParam("re_id") String reid, 
+    					@RequestParam("pwd_check") String pwchk, 
+    					Model model) {
+    		
+        	ModelAndView mav = new ModelAndView();
+        	mav.setViewName("member/memberJoinForm");
+        	mav.addObject("re_id",reid);
+        	
+    		
+    		if( result.getFieldError("userid")!=null) 
+    			mav.addObject("message","아이디 입력하세요");
+    		else if( result.getFieldError("pwd")!=null) 
+    			mav.addObject("message","비밀번호 입력하세요");
+    		else if( !reid.equals(membervo.getUserid()) ) 
+    			mav.addObject("message", "id 중복체크를 하지 않았습니다");
+    		else if( !pwchk.equals( membervo.getPwd() ) ) 
+    			mav.addObject("message", "비밀번호 확인이 일치하지 않습니다");
+    		else {
+            	HashMap<String, Object> paramMap = new HashMap<String, Object>();
+            	paramMap.put("userid", membervo.getUserid());
+            	paramMap.put("pwd", membervo.getPwd());
+            	paramMap.put("name", membervo.getName());
+            	paramMap.put("email", membervo.getEmail());
+            	paramMap.put("phone", membervo.getPhone());
+    			
+    			ms.insertMember(paramMap);
+    			
+    			
+    			
+    			mav.addObject("message", "회원가입이 완료되었습니다. 로그인 하세요");
+    			mav.setViewName("member/loginForm");
+    		}
+    		return mav;
+    	}
+        
+        @RequestMapping("/memberEditForm")
+    	public ModelAndView memberEditForm(HttpServletRequest request) {
+        	//세션의 loginUser 속 데이터들을 MemberVO형태의 dto에 옮겨 담고 수정페이지로 이동
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession();
+        HashMap<String, Object> loginUser = (HashMap<String, Object>)session.getAttribute("loginUser"); 
+        // 세션에서 loginUser추출
+        
+        MemberVO dto = new MemberVO();
+        dto.setUserid((String)loginUser.get("USERID"));
+        dto.setPwd((String)loginUser.get("PWD"));
+        dto.setName((String)loginUser.get("NAME"));
+        dto.setEmail((String)loginUser.get("EMAIL"));
+        dto.setPhone((String)loginUser.get("PHONE"));
+        dto.setProvider((String)loginUser.get("PROVIDER"));
+
+        mav.addObject("dto",dto);
+        mav.setViewName("member/memberEditForm");
+        return mav;
+	
+        }
+        
+        @RequestMapping(value = "memberEdit",  method=RequestMethod.POST)
+    	public String memberEdit(
+    			@ModelAttribute("dto") @Valid MemberVO membervo,BindingResult result,
+    			Model model, HttpServletRequest request,
+    			@RequestParam(value="pwd_Check", required=false) String pwchk ) {
+    		
+    		String url = "member/memberEditForm";	
+    		
+    			if( membervo.getProvider()==null && result.getFieldError("pwd")!=null ) 
+    				model.addAttribute("message", "비밀번호를 입력하세요");
+    			
+    			else if( membervo.getProvider()==null && pwchk!=null && !pwchk.equals( membervo.getPwd() ) ) 
+    				model.addAttribute("message", "비밀번호 확인이 일치하지 않습니다");
+    			
+    			else if( result.getFieldError("name")!=null) 
+    				model.addAttribute("message", "이름을 입력하세요");
+    			else if( result.getFieldError("email")!=null) 
+    				model.addAttribute("message", "이메일을 입력하세요");
+    			else if( result.getFieldError("phone")!=null) 
+    				model.addAttribute("message", "전화번호를 입력하세요");
+    			else if( result.getFieldError("name")!=null) {
+        			model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
+    			}else{
+    				HashMap<String, Object> paramMap = new HashMap<String, Object>();
+                	paramMap.put("userid", membervo.getUserid());
+                	
+                	if( membervo.getProvider()!=null) paramMap.put("pwd", "");
+                	else paramMap.put("pwd", membervo.getPwd());
+
+                	paramMap.put("name", membervo.getName());
+                	paramMap.put("email", membervo.getEmail());
+                	paramMap.put("phone", membervo.getPhone());
+        			
+                	if(membervo.getProvider()!=null) paramMap.put("provider", membervo.getProvider());
+                	else paramMap.put("provider",null);
+                	
+        			ms.updateMember(paramMap);
+        			
+        			HttpSession session = request.getSession();
+        			session.setAttribute("loginUser", paramMap);
+        			
+        			url="redirect:/main";	
+    			}
+    			return url;
+    		}
+    		
+    		
+        
+        	
+        
 }

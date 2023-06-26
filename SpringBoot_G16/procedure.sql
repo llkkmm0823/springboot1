@@ -70,7 +70,7 @@ CREATE OR REPLACE PROCEDURE joinKakao(
     p_userid member.userid%type,
     p_email member.email%type,
     p_name member.name%type,
-    p_provider member.provider%type,
+    p_provider member.provider%type
 
 )
 IS
@@ -81,7 +81,35 @@ BEGIN
 END;
 
 
+CREATE OR REPLACE PROCEDURE insertMember(
+    p_userid member.userid%type,
+    p_pwd member.pwd%type,
+    p_email member.email%type,
+    p_name member.name%type,
+    p_phone member.phone%type
 
+)
+IS
+BEGIN
+    INSERT INTO member (userid,pwd, name, email, phone)
+    VALUES(p_userid,p_pwd,p_name,p_email,p_phone);
+    COMMIT;
+END;
+
+create or replace PROCEDURE updateMember(
+    p_userid member.userid%type,
+    p_pwd member.pwd%type,
+    p_email member.email%type,
+    p_name member.name%type,
+    p_phone member.phone%type
+
+)
+IS
+BEGIN
+    update member set userid=p_userid,pwd=p_pwd, name=p_name, email=p_email, phone=p_phone
+    WHERE userid=p_userid;
+    COMMIT;
+END;
 
 
 

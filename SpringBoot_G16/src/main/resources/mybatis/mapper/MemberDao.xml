@@ -29,5 +29,21 @@
 		)
 		}<!-- in변수는 out이 없기 때문에 이렇게만 써도 됨  -->
 	</insert>
+	
+	<insert id="insertMember" statementType="CALLABLE"  parameterType="java.util.HashMap">
+		{
+		CALL insertMember( 
+			#{userid},#{pwd},#{name},#{email},#{phone}
+		)
+		}<!-- in변수는 out이 없기 때문에 이렇게만 써도 됨  -->
+	</insert>
+	
+	<update id="updateMember" statementType="CALLABLE"  parameterType="java.util.HashMap">
+		{
+		CALL updateMember( 
+			#{userid},#{pwd},#{name},#{email},#{phone}
+		)
+		}<!-- in변수는 out이 없기 때문에 이렇게만 써도 됨  -->
+	</update>
 
 </mapper>
