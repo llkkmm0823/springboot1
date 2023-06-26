@@ -53,6 +53,40 @@ public class BoardService {
 		paramMap.put("paging" , paging);
 	}
 
+	public void getBoard(HashMap<String, Object> paramMap) {
+		bdao.plusOneReadCount( paramMap );		
+		bdao.getBoard( paramMap );		
+	}
+
+	public void insertReply(HashMap<String, Object> paramMap) {
+		bdao.insertReply( paramMap );
+	}
+
+	public void deleteReply(HashMap<String, Object> paramMap) {
+		bdao.deleteReply( paramMap );
+		
+	}
+
+	public void boardViewWithoutCount(HashMap<String, Object> paramMap) {
+		bdao.getBoard( paramMap );		
+		
+	}
+
+	public void insertBoard(HashMap<String, Object> paramMap) {
+		bdao.insertBoard( paramMap );
+		
+	}
+
+	public void updateBoard(HashMap<String, Object> paramMap) {
+		bdao.updateBoard( paramMap );
+		
+	}
+
+	public void deleteBoard(HashMap<String, Object> paramMap) {
+		bdao.deleteBoard( paramMap );
+		
+	}
+
 
 	
 }

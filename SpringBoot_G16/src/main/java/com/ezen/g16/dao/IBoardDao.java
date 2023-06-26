@@ -9,5 +9,12 @@ public interface IBoardDao {
 
 	void getAllCount(HashMap<String, Object> paramMap);
 	void selectBoard(HashMap<String, Object> paramMap);
+	void getBoard(HashMap<String, Object> paramMap);
+	void plusOneReadCount(HashMap<String, Object> paramMap);
+	void insertReply(HashMap<String, Object> paramMap);
+	void deleteReply(HashMap<String, Object> paramMap);
+	void insertBoard(HashMap<String, Object> paramMap);
+	void updateBoard(HashMap<String, Object> paramMap);
+	void deleteBoard(HashMap<String, Object> paramMap);
 
 }

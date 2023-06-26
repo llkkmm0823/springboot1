@@ -5,7 +5,7 @@ create table member(
 	userid varchar2(30),
 	pwd varchar2(30),
 	email varchar2(30),
-	phone varchar2(15),
+	phone varchar2(15), 
 	provider varchar2(30),
 	primary key(userid)
 );
@@ -13,3 +13,4 @@ create table member(
 insert into member values('홍길동', 'scott' , '1234', 'scott@abc.com', '010-1234-1234', null );
 
 select * from member;
+DELETE FROM MEMBER;

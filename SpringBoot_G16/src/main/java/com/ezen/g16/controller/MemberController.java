@@ -293,51 +293,61 @@ public class MemberController {
 	
         }
         
-        @RequestMapping(value = "memberEdit",  method=RequestMethod.POST)
-    	public String memberEdit(
-    			@ModelAttribute("dto") @Valid MemberVO membervo,BindingResult result,
-    			Model model, HttpServletRequest request,
-    			@RequestParam(value="pwd_Check", required=false) String pwchk ) {
-    		
-    		String url = "member/memberEditForm";	
-    		
-    			if( membervo.getProvider()==null && result.getFieldError("pwd")!=null ) 
-    				model.addAttribute("message", "비밀번호를 입력하세요");
-    			
-    			else if( membervo.getProvider()==null && pwchk!=null && !pwchk.equals( membervo.getPwd() ) ) 
-    				model.addAttribute("message", "비밀번호 확인이 일치하지 않습니다");
-    			
-    			else if( result.getFieldError("name")!=null) 
-    				model.addAttribute("message", "이름을 입력하세요");
-    			else if( result.getFieldError("email")!=null) 
-    				model.addAttribute("message", "이메일을 입력하세요");
-    			else if( result.getFieldError("phone")!=null) 
-    				model.addAttribute("message", "전화번호를 입력하세요");
-    			else if( result.getFieldError("name")!=null) {
-        			model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
-    			}else{
-    				HashMap<String, Object> paramMap = new HashMap<String, Object>();
-                	paramMap.put("userid", membervo.getUserid());
-                	
-                	if( membervo.getProvider()!=null) paramMap.put("pwd", "");
-                	else paramMap.put("pwd", membervo.getPwd());
-
-                	paramMap.put("name", membervo.getName());
-                	paramMap.put("email", membervo.getEmail());
-                	paramMap.put("phone", membervo.getPhone());
-        			
-                	if(membervo.getProvider()!=null) paramMap.put("provider", membervo.getProvider());
-                	else paramMap.put("provider",null);
-                	
-        			ms.updateMember(paramMap);
-        			
-        			HttpSession session = request.getSession();
-        			session.setAttribute("loginUser", paramMap);
-        			
-        			url="redirect:/main";	
-    			}
-    			return url;
-    		}
+        @RequestMapping(value="/memberEdit", method=RequestMethod.POST)
+        public String memberEdit(
+              @ModelAttribute("dto") @Valid MemberVO membervo, BindingResult result,
+              @RequestParam(value="pwd_check", required = false) String pwdchk,
+              Model model, HttpServletRequest request) {
+           
+           String url = "member/memberEditForm";
+           
+           
+           if( membervo.getProvider() == null && result.getFieldError("pwd") != null)
+              model.addAttribute("message", "비밀번호 입력하세요");
+           else if( result.getFieldError("name") != null)
+              model.addAttribute("message", "이름을 입력하세요");
+           
+           else if( membervo.getProvider() == null && !membervo.getPwd().equals(pwdchk) )
+              model.addAttribute("message", "비밀번호 확인이 일치하지 않습니다.");
+           
+           else if( result.getFieldError("email") != null)
+              model.addAttribute("message", "이메일을 입력하세요");
+           else if( result.getFieldError("phone") != null)
+              model.addAttribute("message", "전화번호를 입력하세요");
+           else {
+              HashMap<String, Object> paramMap = new HashMap<String, Object>();
+              paramMap.put("userid", membervo.getUserid());
+              
+              if(membervo.getProvider() != null) paramMap.put("pwd", "");
+              else paramMap.put("pwd", membervo.getPwd());
+              
+              paramMap.put("name", membervo.getName());
+              paramMap.put("email", membervo.getEmail());
+              paramMap.put("phone", membervo.getPhone());
+              
+              if( membervo.getProvider() != null ) paramMap.put("provider", membervo.getProvider() );
+              else paramMap.put("provider", null);
+              
+              ms.updateMember( paramMap );
+              
+              paramMap.put("ref_cursor", null);
+              ms.getMember(paramMap);
+              
+              ArrayList<HashMap<String, Object>> list
+              = (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+              
+              HashMap<String, Object> mvo = list.get(0);
+              
+              
+              HttpSession session = request.getSession();
+              session.setAttribute("loginUser", paramMap);
+              
+              url = "redirect:/main";
+           }
+           
+           return url;
+           
+        }
     		
     		
         

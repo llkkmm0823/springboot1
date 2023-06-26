@@ -16,8 +16,8 @@
 <form name="frm" method="post" action="boardUpdate" >
 <input type="hidden" name="num" value="${dto.num}">
 <table>
-	<tr><th>작성자</th><td>${loginUser.userid}
-		<input type="hidden" value="${loginUser.userid}" size="12" name="userid"></td></tr>
+	<tr><th>작성자</th><td>${loginUser.USERID}
+		<input type="hidden" value="${loginUser.USERID}" size="12" name="userid"></td></tr>
 	<tr><th>비번</th><td><input type="password" name="pass" size="12">* 필수 (게시물 수정 삭제시 필요합니다.)</td></tr>
 	<tr><th>이메일</th><td><input type="text" value="${dto.email}" size="12" name="email"></td></tr>
 	<tr><th>제목</th><td><input type="text" value="${dto.title}" size="12" name="title"></td></tr>
