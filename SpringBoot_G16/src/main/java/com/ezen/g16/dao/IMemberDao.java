@@ -9,5 +9,4 @@ public interface IMemberDao {
 
 	void getMember(HashMap<String, Object> paramMap);
 
-
 }

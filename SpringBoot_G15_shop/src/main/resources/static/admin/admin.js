@@ -180,14 +180,37 @@ function change_order( bseq ){
 	var selectVal = selectTag.options[ selectTag.selectedIndex ].value;
 	// 식별한 SELECT 태그의 선택된 인덱스값으로 선택된 값을 추출합니다
 	
-	location.href='change_order?bseq=' + bseq + '&changeval=' + selectVal;
+	location.href='chane_order?bseq=' + bseq + '&changeval=' + selectVal;
 	// BSEQ 와 바꾸려는 값을 갖고 change_order 리퀘스트로 이동합니다
 }
+
 
 
 function go_banner_update(){
 	document.frm.submit();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

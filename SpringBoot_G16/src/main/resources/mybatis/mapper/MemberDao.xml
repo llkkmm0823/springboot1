@@ -3,26 +3,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="com.ezen.m16.dao.IMemberDao">
+<mapper namespace="com.ezen.g16.dao.IMemberDao">
 
+	<resultMap id="memberMap" type="java.util.HashMap"></resultMap>
+	<!-- 프로시져를 사용하는 마이바티스에서는 MemberVO같은 dto 클래스를 사용하지 않습니다.
+			대신 무엇이든 필드명을 키로   데이터 값을 value 로 저장할 수 있는 해시맵을 사용합니다. -->
 
-<resultMap id="memberMap" type="java.util.HashMap"></resultMap>
-<!-- 프로시져를 사용하는 마이바티스에서는 MemberVO와 같은 dto클래스를 사용하지 않음  -->
-<!-- 무엇이든 필트명을 key로 데이터값을 value로 저장할 수 있는 해시맵 사용  -->
-
-
-<!--파라미터가 hashmap인 경우도 안에 담긴 key값을 #{}안에 넣어 value값을 대입할 수 있음  -->
-<select id = "getMember" statementType="CALLABLE" parameterType="java.util.HashMap">
-{
-		CALL getMember(
-		#{userid},
-		#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap}
-	)	
-}
-
-</select>
-<!--결과 레코드가 하나이든 여러개이든 최종결과로 담기는 형태는 ArrayList<HashMap<>> 형태가 될 예정  -->
-<!--레코드 하나가 ArrayList<HashMap<>>에 담김-->
-	
+	<!-- 파라미터가 hashMap인경우도 그안의 담긴 키값들을 #{} 안에서 넣어서 value값을 대입할 수 있습니다 -->
+	<select id="getMember" statementType="CALLABLE"  parameterType="java.util.HashMap">
+		{
+			CALL getMember( 
+				#{userid}, 
+				#{ ref_cursor, mode=OUT, jdbcType=CURSOR , javaType=ResultSet, resultMap=memberMap } 
+			)
+		}
+	</select>
+	<!-- 결과 레코드가 하나이든 여러개이든  최종 결과로 담기는 현태는  ArrayList<HashMap<>>  형태가 될 예정입니다 -->
+	<!-- 레코드 하나가 HashMap<String, Object> 에 담긴다는 뜻입니다 -->
 
 </mapper>

@@ -18,7 +18,7 @@ a {
 
 a:hover {
  text-decoration: underline;
- color: rgb(0, 128, 255);
+ color: #F90;
  cursor: pointer;
 }
 
@@ -118,13 +118,13 @@ footer hr {
 }
 
 #login a:hover {
- color: rgb(0, 64, 128);
+ color: orange;
 }
 
 .btn {
  width: 100px;
  border-radius: 5px;
- background-color: rgb(192, 192, 192);
+ background-color: #FC3;
  color: #333;
  box-shadow: 3px 3px 3px #999999;
  text-decoration: none;
@@ -195,8 +195,6 @@ th, td{
 #list td{ 
  padding: 8px 5px;
  text-align: left;
- font-family: "맑은 고딕";
- font-size: 15px;
 }
 
 table#orderList {
@@ -270,7 +268,7 @@ table#orderList {
  background-repeat: no-repeat;
  background-position: center;
  margin-left: 300px;
- color: rgb(0, 64, 128);
+ color: #006700;
 }
 
 #mypageReserve .btn {
