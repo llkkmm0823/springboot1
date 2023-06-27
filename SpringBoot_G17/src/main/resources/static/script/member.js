@@ -38,8 +38,15 @@ function reInsert(id, useyn){
 	location.href="memberReinsert?id=" + id + "&useyn=" + useyn;
 }
 
-
-
+function go_member_update(){
+	if(document.formm.provider.value='kakao')
+		document.formm.action='memberUpdate';
+	else
+		document.formm.action='memberUpdateKakao';
+	
+	
+	document.formm.submit();
+}
 
 
 

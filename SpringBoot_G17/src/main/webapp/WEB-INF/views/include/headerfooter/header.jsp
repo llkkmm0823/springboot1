@@ -41,7 +41,7 @@
 						<li><a href="contract">JOIN</a></li>
 					</c:when>
 		    		<c:otherwise>
-		       			<li style="color:blue;font-weight:bold;font-size:100%;width:150px; ">${loginUser.name}(${loginUser.id})</li>
+		       			<li style="color:blue;font-weight:bold;font-size:100%;width:150px; ">${loginUser.NAME}(${loginUser.ID})</li>
 		       			<li><a href="memberEditForm">정보수정</a></li>
 		       			<li><a href="logout">LOGOUT</a></li>
 					</c:otherwise>
