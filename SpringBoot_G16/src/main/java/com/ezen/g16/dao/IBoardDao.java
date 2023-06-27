@@ -15,6 +15,6 @@ public interface IBoardDao {
 	void deleteReply(HashMap<String, Object> paramMap);
 	void insertBoard(HashMap<String, Object> paramMap);
 	void updateBoard(HashMap<String, Object> paramMap);
-	void deleteBoard(HashMap<String, Object> paramMap);
+	void removeBoard(HashMap<String, Object> paramMap);
 
 }

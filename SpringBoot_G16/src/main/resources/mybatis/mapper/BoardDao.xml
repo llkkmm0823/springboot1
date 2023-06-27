@@ -7,8 +7,7 @@
 
 	<resultMap id="boardMap" type="java.util.HashMap"></resultMap>
 	<resultMap id="replyMap" type="java.util.HashMap"></resultMap>
-	
-	
+		
 	<select id="getAllCount" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{
 			CALL getAllCount( #{cnt, mode=OUT,  jdbcType=INTEGER } )
@@ -25,57 +24,62 @@
 		}
 	</select>
 	
+	
 	<select id="getBoard" statementType="CALLABLE" parameterType="java.util.HashMap" >
 		{
 			CALL getBoard( 
-				#{num},
-				#{ref_cursor1, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=boardMap}, 
-				#{ref_cursor2, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=replyMap} 
-				
+				#{num}, 
+				#{ref_cursor1 , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=boardMap},
+				#{ref_cursor2 , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=replyMap}
 			)
 		}
 	</select>
 	
+	
 	<update id="plusOneReadCount" statementType="CALLABLE" parameterType="java.util.HashMap" >
 		{
-			CALL plusOneReadCount( #{num})
+			CALL plusOneReadCount(  #{num}  	)
 		}
 	</update>
 	
-	<insert id="insertReply" statementType="CALLABLE" parameterType="java.util.HashMap" >
-		{
-			CALL insertReply( #{boardnum}, #{userid}, #{content})
-		}
-	</insert>
 	
-	
-	<delete id="deleteReply" statementType="CALLABLE" parameterType="java.util.HashMap" >
-		{
-			CALL deleteReply( #{replynum})
-		}
-	</delete>
-	
-	
-	<insert id="insertBoard" statementType="CALLABLE" parameterType="java.util.HashMap" >
-		{
-			CALL insertBoard(  #{userid}, #{pass},#{email},#{content}, #{title}, #{imgfilename})
-		}
-	</insert>
-	
-	
-	
-	<update id="updateBoard" statementType="CALLABLE" parameterType="java.util.HashMap" >
-		{
-			CALL updateBoard( #{num},#{userid}, #{pass},#{email},#{content}, #{title}, #{imgfilename})
+	<update  id="insertReply" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ 
+			CALL insertReply(	
+				#{ boardnum }, #{ userid }, #{ content }   
+			)   
 		}
 	</update>
 	
-	<delete id="deleteBoard" statementType="CALLABLE" parameterType="java.util.HashMap" >
-		{
-			CALL deleteBoard( #{boardnum})
+	<update  id="deleteReply" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ 
+			CALL deleteReply(  	#{ replynum }			)  
 		}
-	</delete>
+	</update>
 	
+	
+	
+	<update  id="insertBoard" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ 
+			CALL insertBoard(	
+				#{ userid }, #{ pass }, #{ email }, #{title}, #{content}, #{imgfilename}   
+			)   
+		}
+	</update>
+	
+	
+	<update id="updateBoard" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{
+			CALL updateBoard( 
+				#{num}, #{ userid }, #{ pass }, #{ email }, #{ title }, #{ content }, #{ imgfilename} 
+			)
+		}
+	</update>
+	
+	
+	<delete  id="removeBoard" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL removeBoard(	#{ num }   ) }
+	</delete>
 	
 </mapper>
 

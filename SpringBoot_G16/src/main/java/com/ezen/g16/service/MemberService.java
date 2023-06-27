@@ -18,7 +18,7 @@ public class MemberService {
 	}
 
 	public void joinKakao(HashMap<String, Object> paramMap) {
-		mdao.joinKakao( paramMap );
+		mdao.joinKakao( paramMap );		
 	}
 
 	public void insertMember(HashMap<String, Object> paramMap) {

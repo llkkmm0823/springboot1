@@ -24,26 +24,41 @@
 	
 	<insert id="joinKakao" statementType="CALLABLE"  parameterType="java.util.HashMap">
 		{
-		CALL joinKakao( 
-			#{userid},#{name},#{email},#{provider}
-		)
-		}<!-- in변수는 out이 없기 때문에 이렇게만 써도 됨  -->
+			CALL joinKakao(
+				#{userid}, #{name}, #{email}, #{provider}
+			)
+		}
 	</insert>
+	
 	
 	<insert id="insertMember" statementType="CALLABLE"  parameterType="java.util.HashMap">
 		{
-		CALL insertMember( 
-			#{userid},#{pwd},#{name},#{email},#{phone}
-		)
-		}<!-- in변수는 out이 없기 때문에 이렇게만 써도 됨  -->
+			CALL insertMember(
+				#{userid}, #{pwd}, #{name}, #{phone}, #{email}
+			)
+		}
 	</insert>
 	
-	<update id="updateMember" statementType="CALLABLE"  parameterType="java.util.HashMap">
+	
+	
+	<insert id="updateMember" statementType="CALLABLE"  parameterType="java.util.HashMap">
 		{
-		CALL updateMember( 
-			#{userid},#{pwd},#{name},#{email},#{phone}
-		)
-		}<!-- in변수는 out이 없기 때문에 이렇게만 써도 됨  -->
-	</update>
+			CALL updateMember(
+				#{userid}, #{pwd}, #{name}, #{email}, #{phone}
+			)
+		}
+	</insert>
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -28,7 +28,7 @@
 			<tr><th>이미지</th>
 				<td>	
 					<input type="button" value="파일 선택" onClick="selectimg()">
-					<div id="image" style="float:left"></div>
+					<div id="image" syle="float:left"></div>
 					<input type="hidden" name="imgfilename" >
 					<img src=""  id="previewimg" width="150" style="display:none" />
 				</td>

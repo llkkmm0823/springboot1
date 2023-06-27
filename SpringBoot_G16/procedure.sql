@@ -66,138 +66,150 @@ SELECT * FROM BOARD;
 ALTER TABLE BOARD ADD REPLYCNT NUMBER(5);
 
 
+
+
 CREATE OR REPLACE PROCEDURE joinKakao(
     p_userid member.userid%type,
-    p_email member.email%type,
     p_name member.name%type,
+    p_email member.email%type,
     p_provider member.provider%type
-
 )
 IS
 BEGIN
-    INSERT INTO member (userid, name, email, provider)
-    VALUES(p_userid,p_email,p_name,p_provider);
+    INSERT INTO member( userid, name, email, provider)
+    VALUES( p_userid, p_name, p_email, p_provider);
     COMMIT;
 END;
+
+
 
 
 CREATE OR REPLACE PROCEDURE insertMember(
     p_userid member.userid%type,
     p_pwd member.pwd%type,
-    p_email member.email%type,
     p_name member.name%type,
-    p_phone member.phone%type
+    p_phone member.phone%type,
+    p_email member.email%type
 
 )
 IS
 BEGIN
-    INSERT INTO member (userid,pwd, name, email, phone)
-    VALUES(p_userid,p_pwd,p_name,p_email,p_phone);
+    INSERT INTO member( userid, pwd, name, phone,email)
+    VALUES( p_userid, p_pwd, p_name,p_phone,p_email);
     COMMIT;
 END;
 
-create or replace procedure updateMember(
+
+
+
+CREATE OR REPLACE PROCEDURE updateMember(
     p_userid member.userid%type,
     p_pwd member.pwd%type,
     p_name member.name%type,
     p_email member.email%type,
     p_phone member.phone%type
 )
-is
-begin
-    update member set pwd = p_pwd, name = p_name, email = p_email, phone = p_phone
-    where userid=p_userid;
-    commit;
-end;
+IS
+BEGIN
+    UPDATE member SET  pwd=p_pwd, name=p_name, email=p_email, phone=p_phone
+    WHERE userid=p_userid;
+    COMMIT;
+END;
 
 
 
 
+
+CREATE OR REPLACE PROCEDURE plusOneReadCount(
+    p_num IN board.num%type   )
+IS
+BEGIN
+    UPDATE board SET readcount = readcount + 1 WHERE num=p_num;
+    COMMIT;
+END;
 CREATE OR REPLACE PROCEDURE getBoard(
-    p_num  IN board.num%type,
+    p_num IN board.num%type,
     p_cur1 OUT SYS_REFCURSOR,
     p_cur2 OUT SYS_REFCURSOR
-    )
+)
 IS
 BEGIN
     OPEN p_cur1 FOR
-            SELECT * FROM board WHERE num=p_num;
-    OPEN p_cur2 FOR
-            SELECT * FROM reply WHERE boardnum=p_num ORDER BY replynum DESC;      
-    END;
-    
-CREATE OR REPLACE PROCEDURE plusOneReadCount(
-    p_num  IN board.num%type
-    )
-IS
-BEGIN
-    UPDATE board SET readcount = readcount +1 WHERE num=p_num;
-    COMMIT;     
+        SELECT * FROM board WHERE num=p_num;
+    OPEN p_cur2 FOR  
+        SELECT * FROM REPLY where boardnum=p_num ORDER BY replynum DESC;
 END;
 
+
+
+
+
 CREATE OR REPLACE PROCEDURE insertReply(
-    p_boardnum  IN reply.boardnum%type,
-    p_userid  IN reply.userid%type,
-    p_content  IN reply.content%type
-    )
+    p_boardnum IN reply.boardnum%TYPE, 
+    p_userid IN reply.userid%TYPE,
+    p_content IN reply.content%TYPE )
 IS
 BEGIN
-   INSERT INTO reply (replynum, boardnum,userid, content)
-    VALUES(reply_seq.nextVal,p_boardnum, p_userid,p_content);
-    COMMIT;   
+    insert into reply( replynum, boardnum, userid, content ) 
+    values( reply_seq.nextVal, p_boardnum, p_userid, p_content );
+    commit;
 END;
+
+
+
 
 
 CREATE OR REPLACE PROCEDURE deleteReply(
-    p_replynum  IN reply.replynum%type
-    )
+    p_replynum IN reply.replynum%TYPE )
 IS
 BEGIN
-   delete from reply where replynum=p_replynum;
-    COMMIT;   
+    delete from reply where replynum=p_replynum;
+    commit;
 END;
 
+
+
+
 CREATE OR REPLACE PROCEDURE insertBoard(
-    p_userid  IN board.userid%type,
-    p_pass  IN board.pass%type,
-    p_email  IN board.email%type,
-    p_content  IN board.content%type,
-    p_title  IN board.title%type,
-    p_imgfilename IN board.imgfilename%type
-    )
+    p_userid IN BOARD.USERID%TYPE,
+    p_pass IN BOARD.PASS%TYPE,
+    p_email IN BOARD.EMAIL%TYPE,
+    p_title IN BOARD.TITLE%TYPE,
+    p_content IN BOARD.CONTENT%TYPE,
+    p_imgfilename IN BOARD.IMGFILENAME%TYPE
+)
 IS
 BEGIN
-   INSERT INTO board (num,userid,pass,email, content,title,imgfilename)
-    VALUES(board_seq.nextVal, p_userid,p_pass,p_email, p_content,p_title,p_imgfilename);
-    COMMIT;   
+    INSERT INTO board( num, pass, userid, email, title, content, imgfilename)
+    VALUES( board_seq.nextVal,  p_pass,  p_userid,  p_email,  p_title, p_content, p_imgfilename);
+    COMMIT;
 END;
+
+
 
 
 CREATE OR REPLACE PROCEDURE updateBoard(
-    p_num  IN board.num%type,
-    p_userid  IN board.userid%type,
-    p_pass  IN board.pass%type,
-    p_email  IN board.email%type,
-    p_content  IN board.content%type,
-    p_title  IN board.title%type,
-    p_imgfilename IN board.imgfilename%type
-    
-    )
+    p_num IN BOARD.NUM%TYPE,
+    p_userid IN BOARD.USERID%TYPE,
+    p_pass IN BOARD.PASS%TYPE,
+    p_email IN BOARD.EMAIL%TYPE,
+    p_title IN BOARD.TITLE%TYPE,
+    p_content IN BOARD.CONTENT%TYPE,
+    p_imgfilename IN BOARD.IMGFILENAME%TYPE
+)
 IS
 BEGIN
-    UPDATE board SET userid=p_userid,pass=p_pass,email=p_email, content=p_content,title=p_title,imgfilename=p_imgfilename
-    WHERE num=p_num;
-    COMMIT;     
+    UPDATE board SET pass=p_pass, userid=p_userid, email=p_email, title=p_title,
+    content=p_content, imgfilename=p_imgfilename WHERE num=p_num;
+    COMMIT;
 END;
 
-CREATE OR REPLACE PROCEDURE deleteBoard(
-    p_num  IN board.num%type
-    )
-IS
-BEGIN
-   delete from board where num=p_num;
-    COMMIT;   
-END;
+
+
+
+
+
+
 
 
 

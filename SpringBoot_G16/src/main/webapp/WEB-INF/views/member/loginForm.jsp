@@ -21,6 +21,7 @@
 				<input type="password" size="20" name="pwd" style="width:200px;height:20px;" >
 			</div>
 		</div>
+		<div class="box"><div id="footer">${message}</div></div>
 		<div class="box"><div id="footer">
 			<input type="submit" value="로그인" />
 			<input type="reset" value="다시작성" />
@@ -33,7 +34,7 @@
 				<img src="/images/facebook.png"    style="width:300px;">
 			</div></div>
 			
-		<div class="box"><div id="footer">${message}</div></div>
+		
 </form>
 
 </body>
