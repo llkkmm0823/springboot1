@@ -59,7 +59,55 @@ END;
 
 
 
+CREATE OR REPLACE PROCEDURE insertOrder(
+     p_id IN orders.id%TYPE,
+     p_oseq OUT orders.oseq%TYPE
+ )
+IS
+    v_oseq orders.oseq%TYPE;
+    cart_cur SYS_REFCURSOR;
+    v_pseq cart.pseq%TYPE;
+    v_quantity cart.quantity%TYPE;
+    v_cseq cart.cseq%TYPE;
+BEGIN
+   -- orders 테이블에 레코드를 추가함
+    INSERT INTO orders(oseq, id)
+    VALUES (orders_seq.nextVal, p_id);
+    
+    -- orders 테이블에 방금 추가된 레코드의 oseq를 조회해서 변수에 담음.
+    SELECT MAX(oseq) INTO v_oseq FROM orders;
+    
+    -- cart 테이블에서 주문할 상품의 상품번호, 수량을 조회해서 커서변수에 담음
+    OPEN cart_cur FOR SELECT cseq, pseq, quantity FROM cart WHERE id = p_id; 
+    
+    LOOP
+        FETCH cart_cur INTO v_cseq, v_pseq, v_quantity;    -- 커서에서 레코드 (pseq, quantity 하나 추출)
+        EXIT WHEN cart_cur%NOTFOUND;
+        INSERT INTO order_detail(odseq, oseq, pseq, quantity)
+        VALUES(order_detail_seq.nextVal, v_oseq, v_pseq, v_quantity);   -- order_detail에 레코드 추가 
+        DELETE FROM cart WHERE cseq = v_cseq;
+    END LOOP;
+    
+    COMMIT;
+    p_oseq := v_oseq;
+    
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        
+END;
 
+create or replace PROCEDURE listOrderByOseq(
+     
+     p_oseq IN orders.oseq%TYPE,
+     p_cur  OUT SYS_REFCURSOR 
+      
+ )
+IS
+BEGIN
+    OPEN p_cur FOR SELECT * FROM order_view where oseq=p_oseq;
+    
+end;
 
 
 
