@@ -42,6 +42,7 @@ public class ProductController {
 		 mav.addObject("newProductList",list1);
 		 mav.addObject("bestProductList",list2);
 		 mav.addObject("bannerList",list3);
+		 mav.addObject("size",list3.size());
 
 		
 		mav.setViewName("desktopIndex");
