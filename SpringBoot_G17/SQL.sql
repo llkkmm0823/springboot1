@@ -1,25 +1,20 @@
-SELECT*FROM BANNER;
-DELETE FROM BANNER WHERE BSEQ=25
-update banner set image='w7.jpg' where bseq=24
+DROP TABLE Member CASCADE CONSTRAINTS;
 
-
-drop table member cascade constraints;
-
-
-create table member(
-	id varchar2(20) not null,
-	pwd varchar2(20),
-	name varchar2(20),
-	email varchar2(40) not null,
-	zip_num varchar2(10),
+CREATE TABLE Member
+(
+	id varchar2(20) NOT NULL,
+	pwd varchar2(20) ,
+	name varchar2(20) ,
+	email varchar2(40) NOT NULL,
+	zip_num varchar2(10) ,
 	address1 varchar2(50),
 	address2 varchar2(50),
 	address3 varchar2(50),
 	phone varchar2(20),
-	indate date default sysdate,
-	useyn char(1) default 'Y',
+	indate date DEFAULT SYSDATE,
+	useyn char(1) DEFAULT 'Y',
 	provider varchar2(30),
-	primary key(id)
+	PRIMARY KEY (id)
 );
 
 insert into member(id, pwd, name, zip_num, address1, address2, phone, email) values

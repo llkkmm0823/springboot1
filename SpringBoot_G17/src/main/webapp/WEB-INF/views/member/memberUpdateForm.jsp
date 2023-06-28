@@ -8,6 +8,7 @@
 		<legend>Basic Info</legend>
 		<label>User ID</label><input type="text" name="id" value="${dto.id}" readonly>
 		<input type="text" name="provider" value="${dto.provider}" readonly><br>
+		
 		<c:choose>
 			<c:when test="${empty dto.provider }" >
 		        <label>Password</label><input type="password"  name="pwd"><br> 
@@ -18,6 +19,7 @@
 		        <label>Retype Password</label><input type="password"  name="pwdCheck" disabled><br>
 	        </c:otherwise>
         </c:choose>
+        
         <label>Name</label><input type="text" name="name"  value="${dto.name}"><br> 
         
         <label>E-Mail</label>
@@ -96,9 +98,11 @@
 	    ${message}
 	</fieldset><div class="clear"></div>
 	<div id="buttons">
-		<input type="submit" value="정보수정" class="submit" > 
+		<input type="button" value="정보수정" class="submit" onClick="go_member_update();"> 
 		<input type="reset" value="취소" class="cancel"></div>
 </form>
 </article>
 
  <%@ include file="../include/headerfooter/footer.jsp" %>
+ 
+ 
