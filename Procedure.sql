@@ -175,7 +175,7 @@ CREATE OR REPLACE PROCEDURE listOrderByOseq(
     p_cur OUT SYS_REFCURSOR   )
 IS
 BEGIN
-    OPEN p_cur FOR SELECT * FROM order_view where oseq=p_oseq;
+    OPEN p_cur FOR SELECT * FROM order_view where oseq=p_oseq ORDER BY RESULT;
 END;
 
 
@@ -203,15 +203,53 @@ EXCEPTION WHEN OTHERS THEN
 END;
 
 
+CREATE OR REPLACE PROCEDURE listOrderByIdIng(
+    p_id IN orders.id%TYPE, 
+    p_rc OUT SYS_REFCURSOR   )
+IS
+BEGIN
+    OPEN p_rc FOR SELECT DISTINCT oseq FROM order_view where id=p_id AND result<>'4' ORDER BY OSEQ DESC;
+END;
+
+CREATE OR REPLACE PROCEDURE listOrderByIdAll(
+    p_id IN orders.id%TYPE, 
+    p_rc OUT SYS_REFCURSOR   )
+IS
+BEGIN
+    OPEN p_rc FOR SELECT DISTINCT oseq FROM order_view where id=p_id ORDER BY OSEQ DESC;
+END;
 
 
+CREATE OR REPLACE PROCEDURE listQna(
+    p_rc OUT SYS_REFCURSOR   )
+IS
+BEGIN
+    OPEN p_rc FOR SELECT * FROM qna ORDER BY qseq desc;
+END;
 
 
+CREATE OR REPLACE PROCEDURE getQna(
+    p_qseq IN qna.qseq%TYPE, 
+    p_rc OUT SYS_REFCURSOR   )
+IS
+BEGIN
+    OPEN p_rc FOR SELECT * FROM qna where qseq=p_qseq;
+END;
 
 
-
-
-
+CREATE OR REPLACE PROCEDURE insertQna(
+    p_id IN qna.id%TYPE,
+    p_check  IN qna.check%TYPE,
+    p_pass  IN qna.pass%TYPE,
+    p_subject  IN qna.subject%TYPE,
+    p_content  IN qna.content%TYPE
+    )
+IS
+BEGIN
+    INSERT INTO qna(qseq, id, check, pass,subject,content ) 
+    VALUES(qna_seq.nextVal,p_id, p_check, p_pass,p_subject,p_content );
+    COMMIT;    
+END;
 
 
 
