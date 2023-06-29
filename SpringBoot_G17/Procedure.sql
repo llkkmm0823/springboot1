@@ -1,3 +1,6 @@
+//sql developerì—ì„œ ctrl+enterë¡œ ì‹¤í–‰
+
+
 CREATE OR REPLACE PROCEDURE getBestNewBannerList(
     p_cur1 OUT SYS_REFCURSOR, 
     p_cur2 OUT SYS_REFCURSOR,
@@ -146,17 +149,17 @@ IS
     v_quantity cart.quantity%TYPE;
     v_cseq cart.cseq%TYPE;
 BEGIN
-    -- orders Å×ÀÌºí¿¡ ·¹ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+    -- orders í…Œì´ë¸”ì— ë ˆì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
     INSERT INTO orders(oseq, id) VALUES( orders_seq.nextVal, p_id);
-    -- orders Å×ÀÌºí¿¡ ¹æ±İ Ãß°¡µÈ ·¹ÄÚµåÀÇ  oseq ¸¦ Á¶È¸ÇØ¼­ º¯¼ö¿¡ ´ã½À´Ï´Ù.
+    -- orders í…Œì´ë¸”ì— ë°©ê¸ˆ ì¶”ê°€ëœ ë ˆì½”ë“œì˜  oseq ë¥¼ ì¡°íšŒí•´ì„œ ë³€ìˆ˜ì— ë‹´ìŠµë‹ˆë‹¤.
     SELECT max(oseq) INTO v_oseq FROM orders;
-    -- cart Å×ÀÌºí¿¡¼­ ÁÖ¹®ÇÒ »óÇ°ÀÇ »óÇ°¹øÈ£, ¼ö·®À» Á¶È¸ÇØ¼­ Ä¿¼­º¯¼ö¿¡ ´ã½À´Ï´Ù
+    -- cart í…Œì´ë¸”ì—ì„œ ì£¼ë¬¸í•  ìƒí’ˆì˜ ìƒí’ˆë²ˆí˜¸, ìˆ˜ëŸ‰ì„ ì¡°íšŒí•´ì„œ ì»¤ì„œë³€ìˆ˜ì— ë‹´ìŠµë‹ˆë‹¤
     OPEN cart_cur FOR SELECT cseq, pseq, quantity FROM cart WHERE id=p_id;
-    LOOP  -- ¹İº¹½ÇÇà¹®À¸·Î cart_cur ÀÇ ´ã±ä³»¿ëµéÀ» ÇÏ³ª¾¿ ²¨³»¼­ ÀÛ¾÷ÇÕ´Ï´Ù
-        FETCH cart_cur INTO v_cseq, v_pseq, v_quantity;    -- Ä¿¼­¿¡¼­ ·¹ÄÚµå(cseq, pseq, quantity)ÇÏ³ª ÃßÃâ
+    LOOP  -- ë°˜ë³µì‹¤í–‰ë¬¸ìœ¼ë¡œ cart_cur ì˜ ë‹´ê¸´ë‚´ìš©ë“¤ì„ í•˜ë‚˜ì”© êº¼ë‚´ì„œ ì‘ì—…í•©ë‹ˆë‹¤
+        FETCH cart_cur INTO v_cseq, v_pseq, v_quantity;    -- ì»¤ì„œì—ì„œ ë ˆì½”ë“œ(cseq, pseq, quantity)í•˜ë‚˜ ì¶”ì¶œ
         EXIT WHEN cart_cur%NOTFOUND;
         INSERT INTO order_detail( odseq, oseq, pseq, quantity )
-        VALUES( order_detail_seq.nextVal, v_oseq, v_pseq, v_quantity );  -- order_detail¿¡ ·¹ÄÚµå Ãß°¡
+        VALUES( order_detail_seq.nextVal, v_oseq, v_pseq, v_quantity );  -- order_detailì— ë ˆì½”ë“œ ì¶”ê°€
         DELETE FROM CART WHERE cseq=v_cseq;
     END LOOP;
     COMMIT;
