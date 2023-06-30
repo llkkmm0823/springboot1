@@ -23,6 +23,11 @@
 	</select>
 	
 	
+	<delete id="deleteCart" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{ CALL deleteCart(  #{cseq}	) }
+	</delete>
+	
+	
 	
 	
 </mapper>

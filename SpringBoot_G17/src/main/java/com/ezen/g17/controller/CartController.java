@@ -63,6 +63,19 @@ public class CartController {
 		}
 		return mav;
 	}
+	
+	
+	@RequestMapping(value="/cartDelete")
+	public String cartDelete( HttpServletRequest request,
+			@RequestParam("cseq") String [] cseqArr ) {
+		
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("cseqArr", cseqArr);
+		
+		cs.deleteCart( paramMap );
+		
+		return "redirect:/cartList";
+	}
 }
 
 

@@ -11,5 +11,6 @@
 		<li><a href="cartList">장바구니(cart)내역</a></li>
 		<li><a href="myPage">진행중인 주문내역</a></li>
 		<li><a href="orderAll">총 주문내역</a></li>
+		<li><a href="#" onclick="withdrawal();">회원탈퇴</a></li>
     </ul>
 </nav> 

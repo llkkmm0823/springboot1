@@ -55,6 +55,10 @@ function go_member_update(){
 
 
 
+function withdrawal(){
+	var ans = confirm("정말로 탈퇴하시겠습니까?");
+	if(ans) location.href='withdrawal';
+}
 
 
 

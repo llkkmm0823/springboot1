@@ -128,7 +128,10 @@ function go_order_save(){
 
 
 
-
+function cal(){
+	if( document.frm.price2.value == "" || document.frm.price1.value=="")return; 
+	document.frm.price3.value = document.frm.price2.value - document.frm.price1.value; 
+}
 
 
 function reInsert(id, useyn){

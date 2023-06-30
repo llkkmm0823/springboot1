@@ -4,7 +4,7 @@
 
 <article>
 	<form method="post" action="login" name="loginFrm">
-		<fieldset><legend>LogIn&nbsp;&nbsp;&nbsp;&nbsp;${message} </legend>
+		<fieldset><legend>LogIn&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:80%; font-weight:bold">${message} </legend>
 			<label>User ID</label><input name="id" type="text" value="${dto.id}"><br> 
 			<label>Password</label><input name="pwd" type="password" >
 			<div>

@@ -26,10 +26,17 @@ function go_cart_delete(){
 	    document.formm.submit();
 	}
 }
+
+
+
+
 function go_order_insert(){
 	document.formm.action ="orderInsert";
 	document.formm.submit();
 }
+
+
+
 function go_order(){
 	document.formm.action ="orderInsertOne";
 	document.formm.submit();

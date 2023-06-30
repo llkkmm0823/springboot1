@@ -44,6 +44,13 @@
 	</update>
 	
 	
+	<update id="withdrawalMember" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{ 
+			CALL withdrawalMember(	#{id}	) 
+		}
+	</update>
+	
+	
 </mapper>
 
 

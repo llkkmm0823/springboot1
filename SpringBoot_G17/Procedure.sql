@@ -135,6 +135,21 @@ END;
 
 
 
+CREATE OR REPLACE PROCEDURE deleteCart(
+    p_cseq  IN cart.cseq%TYPE   )
+IS
+BEGIN
+    delete from cart where cseq = p_cseq;
+    commit;    
+END;
+
+
+
+
+
+
+
+
 CREATE OR REPLACE PROCEDURE insertOrder(
     p_id IN orders.id%TYPE,
     p_oseq OUT orders.oseq%TYPE
@@ -175,10 +190,10 @@ CREATE OR REPLACE PROCEDURE listOrderByOseq(
     p_cur OUT SYS_REFCURSOR   )
 IS
 BEGIN
-    OPEN p_cur FOR SELECT * FROM order_view where oseq=p_oseq;
+    OPEN p_cur FOR SELECT * FROM order_view where oseq=p_oseq ORDER BY RESULT;
 END;
 
-
+SELECT * FROM order_view where oseq=25 ORDER BY RESULT;
 
 
 
@@ -203,6 +218,241 @@ EXCEPTION WHEN OTHERS THEN
 END;
 
 
+CREATE OR REPLACE PROCEDURE listOrderByIdIng(
+    p_id IN ORDERS.ID%TYPE,
+    p_rc OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_rc FOR
+    SELECT DISTINCT oseq FROM ORDER_VIEW WHERE id=p_id AND (result='1' OR result='2' OR result='3') ORDER BY OSEQ DESC;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE listOrderByIdAll(
+    p_id IN ORDERS.ID%TYPE,
+    p_rc OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_rc FOR
+    SELECT DISTINCT oseq FROM ORDER_VIEW WHERE id=p_id ORDER BY OSEQ DESC;
+END;
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE withdrawalMember(
+    p_id  IN member.id%TYPE   )
+IS
+BEGIN
+    UPDATE member SET useyn='N' WHERE id=p_id;
+    COMMIT;    
+END;
+
+select * from member
+
+
+
+CREATE OR REPLACE PROCEDURE listQna (
+    p_rc   OUT     SYS_REFCURSOR )
+IS
+BEGIN
+    OPEN p_rc FOR
+        SELECT * FROM QNA ORDER BY qseq desc;
+END;
+
+
+
+
+CREATE OR REPLACE PROCEDURE getQna (
+    p_qseq IN   Qna.qseq%TYPE,
+    p_rc   OUT     SYS_REFCURSOR )
+IS
+BEGIN
+    OPEN p_rc FOR
+        SELECT * FROM qna WHERE qseq=p_qseq;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE insertQna(
+    p_id IN qna.id%TYPE,
+    p_check IN qna.passcheck%TYPE,
+    p_pass IN qna.pass%TYPE,
+    p_subject  IN qna.subject%TYPE,
+    p_content  IN qna.content%TYPE )
+IS
+BEGIN
+    insert into qna(qseq, id, passcheck, pass, subject, content) 
+    values( qna_seq.nextVal, p_id, p_check, p_pass, p_subject, p_content );
+    commit;    
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE getAdmin(
+    p_id IN   worker.id%TYPE,
+    p_rc   OUT     SYS_REFCURSOR )
+IS
+BEGIN
+    OPEN p_rc FOR
+        select * from worker where id=p_id;
+END;
+
+CREATE OR REPLACE PROCEDURE adminGetAllCount(
+    p_tableName NUMBER,
+    p_key IN VARCHAR2,
+    p_cnt  OUT  NUMBER  )
+IS
+    v_cnt NUMBER;
+BEGIN
+    IF  p_tableName=1  THEN
+        SELECT COUNT(*) INTO v_cnt FROM product WHERE name LIKE '%'||p_key||'%';
+    ELSIF p_tableName=2 THEN
+        SELECT COUNT(*) INTO v_cnt FROM order_view WHERE pname LIKE '%'||p_key||'%';
+    ELSIF p_tableName=3 THEN
+        SELECT COUNT(*) INTO v_cnt FROM member WHERE name LIKE '%'||p_key||'%';
+    ELSIF p_tableName=4 THEN
+        SELECT COUNT(*) INTO v_cnt FROM qna WHERE subject LIKE '%'||p_key||'%' OR  content LIKE '%'||p_key||'%';
+    END IF;
+    p_cnt := v_cnt;
+END;
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE getProductList(
+    p_startNum IN NUMBER,
+    p_endNUM IN NUMBER,
+    p_key IN PRODUCT.NAME%TYPE,
+    p_rc   OUT     SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_rc FOR
+        SELECT * FROM (
+        SELECT * FROM (
+        SELECT rownum as rn, p.* FROM
+        ((SELECT * FROM PRODUCT WHERE name LIKE '%'||p_key||'%'  ORDER BY PSEQ DESC) p)
+        )WHERE rn>=p_startNum
+        )WHERE rn<=p_endNum;
+    
+END;
+
+
+CREATE OR REPLACE PROCEDURE insertProduct(
+    p_name IN product.name%TYPE,
+    p_kind IN product.kind%TYPE, 
+    p_price1 IN product.price1%TYPE,
+    p_price2 IN product.price2%TYPE, 
+    p_price3 IN product.price3%TYPE, 
+    p_content IN product.content%TYPE, 
+    p_image IN product.image%TYPE  )
+IS
+BEGIN
+    INSERT INTO product( pseq, name, kind, price1, price2, price3, content, image) 
+    VALUES( product_seq.nextVal, p_name, p_kind, p_price1, p_price2, p_price3, p_content, p_image );
+    COMMIT;
+END;
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE updateProduct(
+    p_pseq IN product.pseq%TYPE,
+    p_name IN product.name%TYPE,
+    p_kind IN product.kind%TYPE, 
+    p_price1 IN product.price1%TYPE,
+    p_price2 IN product.price2%TYPE, 
+    p_price3 IN product.price3%TYPE, 
+    p_content IN product.content%TYPE, 
+    p_image IN product.image%TYPE  )
+IS
+BEGIN
+    UPDATE  product SET name=p_name, kind=p_kind, price1=p_price1, price2=p_price2, 
+    price3=p_price3, content=p_content, image=p_image WHERE pseq=p_pseq;
+    COMMIT;
+END;
+
+
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE getMemberList(
+    p_startNum IN NUMBER,
+    p_endNUM IN NUMBER,
+    p_key IN member.NAME%TYPE,
+    p_rc   OUT     SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_rc FOR
+        SELECT * FROM (
+        SELECT * FROM (
+        SELECT rownum as rn, p.* FROM
+        ((SELECT * FROM member WHERE name LIKE '%'||p_key||'%'  ORDER BY indate DESC) p)
+        )WHERE rn>=p_startNum
+        )WHERE rn<=p_endNum;
+    
+END;
+
+
+
+
+CREATE OR REPLACE PROCEDURE memberReinsert(
+    p_id IN member.id%TYPE,
+    p_useyn IN member.useyn%TYPE )
+IS
+BEGIN
+    UPDATE  member SET useyn=p_useyn WHERE id=p_id;
+    COMMIT;
+END;
+
+select * from member
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE getOrderList(
+    p_startNum IN NUMBER,
+    p_endNUM IN NUMBER,
+    p_key IN member.NAME%TYPE,
+    p_rc   OUT     SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_rc FOR
+        SELECT * FROM (
+        SELECT * FROM (
+        SELECT rownum as rn, p.* FROM
+        ((SELECT * FROM order_view WHERE pname LIKE '%'||p_key||'%'  ORDER BY result ASC , indate DESC  ) p)
+        )WHERE rn>=p_startNum
+        )WHERE rn<=p_endNum;
+    
+END;
+
+select * from member
+select * from order_view
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE updateOrderResult(
+    p_odseq IN order_detail.odseq%TYPE )
+IS
+BEGIN
+    UPDATE  order_detail SET result=result+1 WHERE odseq=p_odseq;
+    COMMIT;
+END;
 
 
 
@@ -211,8 +461,60 @@ END;
 
 
 
+CREATE OR REPLACE PROCEDURE getQnaList(
+    p_startNum IN NUMBER,
+    p_endNUM IN NUMBER,
+    p_key IN qna.subject%TYPE,
+    p_rc   OUT     SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_rc FOR
+        SELECT * FROM (
+        SELECT * FROM (
+        SELECT rownum as rn, p.* FROM
+        ((SELECT * FROM qna WHERE subject LIKE '%'||p_key||'%' OR  content LIKE '%'||p_key||'%'  ORDER BY qseq DESC  ) p)
+        )WHERE rn>=p_startNum
+        )WHERE rn<=p_endNum;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE updateOna(
+    p_qseq IN qna.qseq%TYPE,
+    p_reply IN qna.reply%TYPE)
+IS
+BEGIN
+    UPDATE  qna SET reply=p_reply, rep='2' WHERE qseq=p_qseq;
+    COMMIT;
+END;
 
 
 
 
 
+CREATE OR REPLACE PROCEDURE getBannerList(
+    p_rc   OUT     SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_rc FOR
+        SELECT * FROM banner ORDER BY order_seq;
+        
+END;
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE insertBanner(
+    p_subject IN banner.subject%TYPE,
+    p_order_seq IN banner.order_seq%TYPE, 
+    p_useyn IN banner.useyn%TYPE,
+    p_image IN banner.image%TYPE  )
+IS
+BEGIN
+    INSERT INTO banner( bseq, subject, order_seq, useyn, image) 
+    VALUES( banner_seq.nextVal, p_subject, p_order_seq, p_useyn, p_image );
+    COMMIT;
+END;

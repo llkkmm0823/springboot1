@@ -47,12 +47,13 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping(value="login", method=RequestMethod.POST)
+	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(
 			@ModelAttribute("dto") @Valid MemberVO membervo,	BindingResult result,
 			HttpServletRequest request,	Model model	) {
 		
-		String url="member/login.jsp";
+		String url="member/login";
+		
 		if( result.getFieldError("id") != null )
 			model.addAttribute("message", result.getFieldError("id").getDefaultMessage() );
 		else if( result.getFieldError("pwd") != null )
@@ -71,17 +72,22 @@ public class MemberController {
 				model.addAttribute("message" , "아이디가 없습니다");
 				return "member/login";
 			}
+			
 			HashMap<String, Object> mvo = list.get(0);
-			if( mvo.get("PWD") == null )
+			
+			if( mvo.get("USEYN").equals( "N" ) )
+				model.addAttribute("message" , "회원탈퇴 이력이있습니다. 재가입은 관리자에게 문의하세요");
+			else if( mvo.get("PWD") == null )
 				model.addAttribute("message" , "관리자에게 문의하세요");
 			else if( !mvo.get("PWD").equals( membervo.getPwd() ) )
-				model.addAttribute("message" , "비번이 안맞습니다");
+				model.addAttribute("message" , "비번이 안맞습니다");				
 			else  if( mvo.get("PWD").equals( membervo.getPwd() ) ) {
 				HttpSession session = request.getSession();
 				session.setAttribute("loginUser", mvo);
 				url = "redirect:/";
 			}
 		}
+		System.out.println(url);
 		return url;
 	}
 	
@@ -334,6 +340,20 @@ public class MemberController {
 			url = "redirect:/";
 		}
 		return url;
+	}
+	
+	
+	@RequestMapping("/withdrawal")
+	public String withdrawal( HttpServletRequest request , Model model) {
+		
+		HttpSession session = request.getSession();
+		HashMap<String, Object> mvo = ( HashMap<String, Object> )session.getAttribute("loginUser");
+		String id = (String)mvo.get("ID");
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("id", id);
+		ms.withdrawalMember( paramMap );
+		model.addAttribute("message" , "회원탈퇴가 정상적으로 처리되었습니다");
+		return "member/login";
 	}
 }
 

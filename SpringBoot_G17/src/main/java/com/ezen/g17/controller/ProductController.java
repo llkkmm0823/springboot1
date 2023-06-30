@@ -104,7 +104,21 @@ public class ProductController {
 	public ModelAndView mobilemain( ) {
 		ModelAndView mav = new  ModelAndView();
 		
-		mav.setViewName("mobileindex");
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("ref_cursor1", null);
+		paramMap.put("ref_cursor2", null);
+		paramMap.put("ref_cursor3", null);
+		
+		ps.getBestNewBannerList(paramMap);
+		
+		ArrayList<HashMap<String , Object>> list1
+			= (ArrayList<HashMap<String , Object>>) paramMap.get("ref_cursor1");
+		ArrayList<HashMap<String , Object>> list2
+			= (ArrayList<HashMap<String , Object>>) paramMap.get("ref_cursor2");
+		mav.addObject("newProductList", list1);
+		mav.addObject("bestProductList", list2);
+		
+		mav.setViewName("mobile/mobileindex");
 		return mav;
 	}
 }

@@ -31,6 +31,17 @@ public class CartService {
 		paramMap.put("totalPrice", totalPrice );
 	}
 
+	public void deleteCart(HashMap<String, Object> paramMap) {
+		
+		String [] cseqArr = (String [])paramMap.get("cseqArr");
+		
+		for( String cseq : cseqArr) {
+			paramMap.put("cseq", cseq);
+			cdao.deleteCart(paramMap);
+		}
+		
+	}
+
 	
 }
 

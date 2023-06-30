@@ -24,29 +24,30 @@
 			<tr>
 				<td>
 					<c:choose>
-						<c:when test='${orderVO.result=="1"}'>
-							<span style="font-weight: bold; color: black">${orderVO.oseq}</span>
-							(<input type="checkbox" name="result" value="${orderVO.odseq}"> 결제완료)</c:when>
-						<c:when test='${orderVO.result=="2"}'>
-							<span style="font-weight: bold; color: black">${orderVO.oseq}</span>
-							(<input type="checkbox" name="result" value="${orderVO.odseq}"> 배송중)</c:when>
-						<c:when test='${orderVO.result=="3"}'>
-							<span style="font-weight: bold; color: red">${orderVO.oseq}
+						<c:when test='${orderVO.RESULT=="1"}'>
+							<span style="font-weight: bold; color: black">${orderVO.OSEQ}</span>
+							(<input type="checkbox" name="result" value="${orderVO.ODSEQ}"> 결제완료)</c:when>
+						<c:when test='${orderVO.RESULT=="2"}'>
+							<span style="font-weight: bold; color: black">${orderVO.OSEQ}</span>
+							(<input type="checkbox" name="result" value="${orderVO.ODSEQ}"> 배송중)</c:when>
+						<c:when test='${orderVO.RESULT=="3"}'>
+							<span style="font-weight: bold; color: red">${orderVO.OSEQ}
 							(<input type="checkbox" checked="checked" disabled="disabled"> 배송완료)</span></c:when>
 				    	<c:otherwise>
-				       		<span style="font-weight: bold; color: blue">${orderVO.oseq}
+				       		<span style="font-weight: bold; color: blue">${orderVO.OSEQ}
 				      		(<input type="checkbox" checked="checked" disabled="disabled"> 구매확정)</span></c:otherwise>
 					</c:choose>
 				</td>
-				<td>${orderVO.mname}(${orderVO.id})</td><td>${orderVO.pname}</td><td>${orderVO.quantity}</td>
-				<td>${orderVO.zip_num}</td>
-				<td  style="text-align:left">${orderVO.address1} ${orderVO.address2}</td> <td>${orderVO.phone}</td>
-				<td><fmt:formatDate value="${orderVO.indate}" /></td></tr>
+				<td>${orderVO.MNAME}(${orderVO.ID})</td><td>${orderVO.PNAME}</td><td>${orderVO.QUANTITY}</td>
+				<td>${orderVO.ZIP_NUM}</td>
+				<td  style="text-align:left">${orderVO.ADDRESS1} ${orderVO.ADDRESS2}</td> <td>${orderVO.PHONE}</td>
+				<td><fmt:formatDate value="${orderVO.INDATE}" /></td></tr>
 		</c:forEach>
 	</table>
 	<div class="clear"></div>
 	<input type="button" class="btn" style="width: 200px" value="다음단계로" onClick="go_order_save()">
 </form><br>
+
 <jsp:include page="../../include/paging/paging.jsp">
 	<jsp:param name="command" value="adminOrderList" />
 </jsp:include>

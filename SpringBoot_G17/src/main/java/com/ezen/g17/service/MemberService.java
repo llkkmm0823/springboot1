@@ -31,5 +31,9 @@ public class MemberService {
 		
 	}
 
+	public void withdrawalMember(HashMap<String, Object> paramMap) {
+		mdao.withdrawalMember( paramMap );		
+	}
+
 	
 }
