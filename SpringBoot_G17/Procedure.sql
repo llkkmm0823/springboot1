@@ -1,4 +1,5 @@
 //sql developer에서 ctrl+enter로 실행
+//프로시저 사용은 필수아님
 
 
 CREATE OR REPLACE PROCEDURE getBestNewBannerList(
