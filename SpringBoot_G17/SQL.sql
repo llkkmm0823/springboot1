@@ -1,5 +1,8 @@
 DROP TABLE Member CASCADE CONSTRAINTS;
 
+--sql developer로 실행시켜도 Ok
+
+
 CREATE TABLE Member
 (
 	id varchar2(20) NOT NULL,
