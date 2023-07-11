@@ -1,3 +1,5 @@
+--í”„ë¡œì‹œì €ì‚¬ìš©ì€ í•„ìˆ˜ ì•„ë‹˜
+
 CREATE OR REPLACE PROCEDURE getMember(
     p_userid IN member.userid%TYPE,
     p_cursor OUT SYS_REFCURSOR  )
@@ -28,14 +30,14 @@ CREATE OR REPLACE PROCEDURE selectBoard(
     p_endNum IN NUMBER,
     p_cursor OUT SYS_REFCURSOR   )
 IS
-    temp_cur SYS_REFCURSOR;   -- °Ô½Ã¹° ¹øÈ£¸¸ Á¶È¸ÇÑ °á°ú¸¦ ´ãÀ» Ä¿¼­º¯¼ö
-    v_num NUMBER;    -- ±×µéÀÇ °Ô½Ã¹° ¹øÈ£µéÀ» ¹ø°¥¾Æ°¡¸ç ÀúÀåÇÒ º¯¼ö
-    v_rownum NUMBER;   -- ±×µéÀÇ Çà¹øÈ£µéÀ» ¹ø°¥¾Æ°¡¸ç ÀúÀåÇÒ º¯¼ö
-    v_cnt NUMBER;    -- °¢ °Ô½Ã¹° ¹øÈ£·Î Á¶È¸ÇÑ ´ñ±Û°¹¼ö¸¦ ÀúÀåÇÒ º¯¼ö
+    temp_cur SYS_REFCURSOR;   -- ê²Œì‹œë¬¼ ë²ˆí˜¸ë§Œ ì¡°íšŒí•œ ê²°ê³¼ë¥¼ ë‹´ì„ ì»¤ì„œë³€ìˆ˜
+    v_num NUMBER;    -- ê·¸ë“¤ì˜ ê²Œì‹œë¬¼ ë²ˆí˜¸ë“¤ì„ ë²ˆê°ˆì•„ê°€ë©° ì €ìž¥í•  ë³€ìˆ˜
+    v_rownum NUMBER;   -- ê·¸ë“¤ì˜ í–‰ë²ˆí˜¸ë“¤ì„ ë²ˆê°ˆì•„ê°€ë©° ì €ìž¥í•  ë³€ìˆ˜
+    v_cnt NUMBER;    -- ê° ê²Œì‹œë¬¼ ë²ˆí˜¸ë¡œ ì¡°íšŒí•œ ëŒ“ê¸€ê°¯ìˆ˜ë¥¼ ì €ìž¥í•  ë³€ìˆ˜
 BEGIN
-    -- board Å×ÀÌºí¿¡¼­ startNum °ú endNum »çÀÌÀÇ °Ô½Ã¹°À» Á¶È¸ÇÏµÇ,  °Ô½Ã¹° ¹øÈ£(num) °ª¸¸ ÃëÇÕ´Ï´Ù(ROWNUM µµ °°ÀÌ)
-    -- num °ªÀ¸·Î reply Å×ÀÌºí¿¡¼­ boardnum ÀÌ num ÀÎ ·¹ÄÚµå°¡ ¸î°³ÀÎÁö °¹¼ö¸¦ ±¸ÇÕ´Ï´Ù
-    -- num °ª°ú ´ñ±Û °¹¼ö¸¦ ÀÌ¿ëÇØ¼­ board Å×ÀÌºíÀÇ replycnt ÇÊµå¸¦  update  ÇÕ´Ï´Ù
+    -- board í…Œì´ë¸”ì—ì„œ startNum ê³¼ endNum ì‚¬ì´ì˜ ê²Œì‹œë¬¼ì„ ì¡°íšŒí•˜ë˜,  ê²Œì‹œë¬¼ ë²ˆí˜¸(num) ê°’ë§Œ ì·¨í•©ë‹ˆë‹¤(ROWNUM ë„ ê°™ì´)
+    -- num ê°’ìœ¼ë¡œ reply í…Œì´ë¸”ì—ì„œ boardnum ì´ num ì¸ ë ˆì½”ë“œê°€ ëª‡ê°œì¸ì§€ ê°¯ìˆ˜ë¥¼ êµ¬í•©ë‹ˆë‹¤
+    -- num ê°’ê³¼ ëŒ“ê¸€ ê°¯ìˆ˜ë¥¼ ì´ìš©í•´ì„œ board í…Œì´ë¸”ì˜ replycnt í•„ë“œë¥¼  update  í•©ë‹ˆë‹¤
     OPEN temp_cur FOR
             SELECT * FROM (
                 SELECT * FROM (
@@ -50,7 +52,7 @@ BEGIN
     END LOOP;
     COMMIT;
     
-    -- ´ñ±Û°¹¼ö°¡ Ã¤¿öÁø ´ë»ó °Ô½Ã¹°À» Á¶È¸ÇØ¼­ p_cursor¿¡ ´ã½À´Ï´Ù.
+    -- ëŒ“ê¸€ê°¯ìˆ˜ê°€ ì±„ì›Œì§„ ëŒ€ìƒ ê²Œì‹œë¬¼ì„ ì¡°íšŒí•´ì„œ p_cursorì— ë‹´ìŠµë‹ˆë‹¤.
     OPEN p_cursor FOR
             SELECT * FROM (
                 SELECT * FROM (
