@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LombokController {
-	
+	//리퀘스트매핑이 고전코드라는 얘기가 있음.. 참고
 	@RequestMapping("/")
 	public String root(){
 
