@@ -2,7 +2,7 @@ DROP TABLE Member CASCADE CONSTRAINTS;
 
 --sql developer로 실행시켜도 Ok
 
-
+--member table
 CREATE TABLE Member
 (
 	id varchar2(20) NOT NULL,
@@ -20,6 +20,7 @@ CREATE TABLE Member
 	PRIMARY KEY (id)
 );
 
+--data insert
 insert into member(id, pwd, name, zip_num, address1, address2, phone, email) values
 ('one', '1111', '김나리', '133-110', '서울시 성동구 성수동1가' , '1번지21호', '017-777-7777','acc@abc.com');
 insert into member(id, pwd, name, zip_num, address1, address2, phone, email)values
