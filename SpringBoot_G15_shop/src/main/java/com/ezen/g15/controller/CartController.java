@@ -29,7 +29,9 @@ public class CartController {
 			@RequestParam("pseq") int pseq , 
 			@RequestParam("quantity") int quantity ,
 			HttpServletRequest request ) {
-		
+
+		//세션 설정
+
 		HttpSession session = request.getSession();
 		MemberVO mvo = (MemberVO)session.getAttribute("loginUser");
 		if( mvo == null) {
@@ -44,7 +46,7 @@ public class CartController {
 		return "redirect:/cartList";
 	}
 	
-	
+//카트리스트 설정
 	@RequestMapping("cartList")
 	public ModelAndView cart_list( HttpServletRequest request ) {
 		ModelAndView mav = new ModelAndView();
